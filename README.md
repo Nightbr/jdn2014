@@ -33,8 +33,8 @@ Laravel :
 
 2 - Pour installer la base de donnée :
 
-    * configurer la connexion dans laravel/app/config/database.php
+* configurer la connexion dans laravel/app/config/database.php
 
-    * Créer les tables `php artisan migrate`
+* Créer les tables `php artisan migrate`
  
-    *  Créer les utilisateurs de test `php artisan db:seed`
+*  Créer les utilisateurs de test `php artisan db:seed`
