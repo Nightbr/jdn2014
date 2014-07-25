@@ -17,7 +17,9 @@ Route::get('/', function()
 });
 
 // Groupe de routes pour le versioning d'API
-Route::group(array('prefix' => 'api/v1', 'before' => 'auth.basic'), function()
+Route::group(array('prefix' => 'v1', 'before' => 'auth.basic'), function()
 {
-  Route::resource('url', 'UrlController');
+  Route::resource('url', 'UrlController', array('except' => array('create', 'edit', 'destroy')));
+  Route::resource('categorie', 'CategorieController', array('except' => array('create', 'edit', 'destroy')));
+  Route::resource('guest', 'GuestController', array('except' => array('create', 'edit', 'destroy')));
 });

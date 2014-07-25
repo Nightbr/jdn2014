@@ -88,13 +88,17 @@ module.exports = function (grunt) {
                 port: 9000,
                 livereload: 35729,
                 // Change this to '0.0.0.0' to access the server from outside
-                hostname: 'localhost'
+                hostname: 'localhost',
+                middleware: proxyMiddleware
             },
             proxies: [
                 {
                     context: '/api',
                     host: 'localhost',
-                    port: 8000
+                    port: 8000,
+                    rewrite: {
+                        '^/api': ''
+                    }
                 }
             ],
             livereload: {
@@ -136,12 +140,12 @@ module.exports = function (grunt) {
             },
             server: {
                 options: {
-                    base: '<%= yeoman.app %>',
+                    base: '<%= yeoman.app %>/api/laravel/public',
                 }
             },
             dist: {
                 options: {
-                    base: '<%= yeoman.dist %>',
+                    base: '<%= yeoman.dist %>/api/laravel/public',
                 }
             }
         },
