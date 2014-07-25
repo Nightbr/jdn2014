@@ -122,7 +122,7 @@ class GuestController extends \BaseController {
 
 		if ( Request::get('categorie_id') )
 		{
-		    $guest->categorie_id = Request::get('categorie_id');
+		    $guest->categorie()->associate(Categorie::find(Request::get('categorie_id')));
 		}
 
 		$guest->save();
