@@ -23,4 +23,19 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $hidden = array('password', 'remember_token');
 
+	/**
+	*
+	* The rules uses for the validation of the model. Use by administrator.
+	*
+	* @var array
+	*/
+	public $rules = array(
+		'username' => 'required',
+		'password' =>'required',
+	);
+
+	public function setPasswordAttribute($value){
+		$this->attributes['password'] = Hash::make($value);
+	}
+
 }
