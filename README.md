@@ -12,6 +12,10 @@ JDN app
 
     grunt serve
 
+Note Importante : Sachant que le Basic Auth ne fonctionne pas avec php CGI utilisé par le module grunt-php, il faut mettre l'ensemble du projet dans un environnement de dev (WAMP, MAMP, LAMP, ...). Et du coup, plus besoin d'utiliser le grunt serve.
+
+On ne se servira de grunt uniquement pour générer le dist, effectuer les tests, compiler le sass, ...
+
 
 3. Dev note :
 -----------------------------
@@ -37,4 +41,4 @@ Laravel :
 
 * Créer les tables `php artisan migrate`
  
-*  Créer les utilisateurs de test `php artisan db:seed`
+*  Créer les jeux de test `php artisan db:seed`
