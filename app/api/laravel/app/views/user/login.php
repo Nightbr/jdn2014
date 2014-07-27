@@ -13,7 +13,7 @@
 <body>
   <section class="container">
     <div class="login">
-      <h1>Login to Web App</h1>
+      <h1>Login to JDN Web App</h1>
       <?php echo Form::open(array('action' => 'UserController@login')); ?>
         <p><input type="text" name="username" value="" placeholder="Username"></p>
         <p><input type="password" name="password" value="" placeholder="Password"></p>
@@ -31,6 +31,10 @@
     <div class="login-help"  style="display: none;">
       <p>Forgot your password? <a href="index.html">Click here to reset it</a>.</p>
     </div>
+  </section>
+  <section class="about">
+    <p class="about-author">
+      &copy; 2014 - jdn 
   </section>
 </body>
 </html>

@@ -63,7 +63,7 @@ return array(
 	{
         if (Auth::check())
         {
-            // The user is logged in...
+            /* the user is logged check his role */
 		    return Auth::user()->hasRole('admin');
         }
 
@@ -111,7 +111,7 @@ return array(
 	 *
 	 * @type string
 	 */
-	'logout_path' => 'user/login',
+	'logout_path' => 'user/logout',
 
 	/**
 	 * This is the key of the return path that is sent with the redirection to your login_action. Session::get('redirect') will hold the return URL.

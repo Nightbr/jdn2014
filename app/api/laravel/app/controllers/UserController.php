@@ -6,7 +6,7 @@ class UserController extends \BaseController {
     {
         Auth::logout();
   
-        return Redirect::route("user/login");
+        return Redirect::to("user/login");
     }
 
     public function login()
@@ -27,7 +27,7 @@ class UserController extends \BaseController {
             }
         }
     
-      return View::make("user/login");
+      return View::make("user.login");
     }
     
     protected function isPostRequest()
