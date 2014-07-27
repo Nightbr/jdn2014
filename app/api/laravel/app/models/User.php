@@ -34,8 +34,58 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 		'password' =>'required',
 	);
 
-	public function setPasswordAttribute($value){
+	public function setPasswordAttribute($value)
+    {
 		$this->attributes['password'] = Hash::make($value);
 	}
+
+    public function getAuthIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getAuthPassword()
+    {
+        return $this->password;
+    } 
+  
+    public function getRememberToken()
+    {
+        return $this->remember_token;
+    }
+  
+    public function setRememberToken($value)
+    {
+        $this->remember_token = $value;
+    }
+  
+    public function getRememberTokenName()
+    {
+        return "remember_token";
+    }
+  
+    public function getReminderEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+    *
+    * verify which role the user has
+    *
+    * @var string
+    * @return boolean
+    */
+    public function hasRole($strRole)
+    {
+        if($this->original['role'] == $strRole)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
 }

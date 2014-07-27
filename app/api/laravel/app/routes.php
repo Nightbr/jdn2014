@@ -16,10 +16,20 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
-// Groupe de routes pour le versioning d'API
+/* Groupe de routes pour le versioning d'API */
 Route::group(array('prefix' => 'v1', 'before' => 'auth.basic'), function()
 {
   Route::resource('url', 'UrlController', array('except' => array('create', 'edit', 'destroy')));
   Route::resource('categorie', 'CategorieController', array('except' => array('create', 'edit', 'destroy')));
   Route::resource('guest', 'GuestController', array('except' => array('create', 'edit', 'destroy')));
+});
+
+/* groupe de routes pour le système d'auth */
+Route::group(array('prefix' => 'user'), function()
+{
+    Route::get('login', function(){
+        return View::make('user.login');
+    });
+    Route::post('login', array('before' => 'csrf', 'uses' => 'UserController@login'));
+    Route::get("logout", array("uses" => "UserController@logout"));
 });

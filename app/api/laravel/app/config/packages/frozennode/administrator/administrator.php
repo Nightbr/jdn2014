@@ -61,8 +61,13 @@ return array(
 	 */
 	'permission'=> function()
 	{
-		return true; // /!\ pour le dev
-		//return Auth::user()->hasRole('admin');
+        if (Auth::check())
+        {
+            // The user is logged in...
+		    return Auth::user()->hasRole('admin');
+        }
+
+        return false;
 	},
 
 	/**

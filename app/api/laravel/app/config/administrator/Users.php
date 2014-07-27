@@ -9,6 +9,9 @@ return array(
 		'username' => array(
 			'title' => 'Username',
 		),
+        'role' => array(
+            'title' => 'Role',
+        ),
 		'created_at' => array(
 			'title' => 'Created At',
 		),
@@ -28,12 +31,20 @@ return array(
 				return !$model->exists;
 			}
 		),
+        'role' =>array(
+            'title' => 'role',
+            'type' =>'text',
+        ),
 	),
 	'filters' => array(
 		'username' =>array(
 			'title' => 'Username',
 			'type' => 'text',
 		),
+        'role' =>array(
+            'title' => 'role',
+            'type' =>'text',
+        ),
 	),
 	'sort' =>array(
 		'field' =>'username',
