@@ -8,15 +8,15 @@ class UserTableSeeder extends Seeder {
  
       User::create(array(
           'username' => 'adminjdn',
-          'password' => Hash::make('jdnadmindede'),
+          'password' => 'jdnadmindede',
           'email'    => 'dede@example.com',
           'role'     => 'admin'
       ));
  
       User::create(array(
           'username' => 'apiuser1',
-          'password' => Hash::make('gogogo'),
-          'email'    => 'dede@example.com',
+          'password' => 'gogogo',
+          'email'    => 'roo@example.com',
           'role'     => 'api'
       ));
   }
