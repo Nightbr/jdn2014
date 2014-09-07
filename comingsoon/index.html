@@ -1,0 +1,49 @@
+<html>
+    <head>
+      <link rel="stylesheet" type="text/css" href="stylesheet.css"/>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>JDN2014 - Coming Soon...</title>
+      <meta name="description" content="JDN2014 - coming soon - IG2I événement">
+		<link href='http://fonts.googleapis.com/css?family=Cinzel' rel='stylesheet' type='text/css'>
+    </head>
+    <body class="comingsoon" >
+		
+			<div id="countdown" align="center">
+				<p id="p" class="days">00</p>
+				<p id="p" class="timeRefDays">:</p>
+				<p id="p" class="hours">00</p>
+				<p id="p" class="timeRefHours">:</p>
+				<p id="p" class="minutes">00</p>
+				<p id="p" class="timeRefMinutes">:</p>
+				<p id="p" class="seconds">00</p>
+				
+			</div>
+	   <div id="body">
+		</div>
+	
+     
+		<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+
+		 <script type="text/javascript" src="script.js"></script>
+	  <script>
+	  
+	  
+	  //load parallaxes
+    $(document).ready(function(){
+        Load();
+		
+		
+    });
+	
+	//Handle window's resizing to reload divs
+	$( window ).resize(function() {
+		var url= location.href;
+		url = url.split("#",1)
+		location = url;
+	});
+	
+	  </script>
+    </body>
+    
+</html>
