@@ -242,37 +242,8 @@
           
    
 	  
-    <div align="center"  >  
-	
-     <!-- div "lapinou" à copier sans modération !!! -->
-		<div class="lapinou col-md-3" >                  
-			<h4>Promo 2007</h4>		
-				<span>Diplomés</span> 
-					<!--LAPINOU MODAL: afficher la liste dans un modal + voir avec l'API si possible, 
-					envoyer la liste ajax en fonction du bouton cliqué (#data-target "#MyModal?listepromo200X"?? ou dans le js (en bas)
-					Ceci est un test, copier les lapinous si fonctionnel... ;) 
-					Le modal se trouve en dessous des lapinous pour modifs-->
-           <br/> <br/>
-			<button class="btn btn-danger btn-lg button-modal"  data-target="#myModal">
-				Voir la liste
-			</button>	
-        </div>     
-     <!-- fin div "lapinou" -->
-			 
-			 
-			 
-	<div class="lapinou col-md-3" >                  
-			<h4>Promo 2008</h4>		
-				<span>Diplomés</span> 
-					<!--LAPINOU MODAL: afficher la liste dans un modal + voir avec l'API si possible, 
-					envoyer la liste ajax en fonction du bouton cliqué (#data-target "#MyModal?listepromo200X"??
-					Ceci est un test, copier le bouton dans les autres lapinou-box si fonctionnel... ;) 
-					Le modal se trouve en dessous des lapinous pour modifs-->
-           <br/> <br/>
-			<button class="btn btn-danger btn-lg button-modal"  data-target="#myModal">
-				Voir la liste
-			</button>	
-        </div>    
+   <div id="promoList" align="center">
+      <!-- liste des promos -->
 	</div>		
 	
 	
@@ -438,13 +409,12 @@
    <script type="text/javascript" src="js/retina-1.1.0.min.js"></script> 
    <script type="text/javascript" src="js/smoothscroll.js"></script>
    <script src="js/jquery.scrolly.js"></script>
+   <script type="text/javascript" src="js/mustache.js"></script>
+
 
    <script type="text/javascript" src="js/config.js"></script>    
    <script type="text/javascript" src="js/script.js"></script>
-   <script type="text/javascript" src="js/app.js"></script>
-
-
-   
+   <script type="text/javascript" src="js/app.js"></script>  
 
  
   

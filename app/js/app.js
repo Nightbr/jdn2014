@@ -50,11 +50,48 @@ $('[data-spy="scroll"]').each(function () {
 });
 
 
+$(function() {
+
+   // à voir pour la sécu...
+   var api_url = "http://localhost/jdn2014/app/api/laravel/public/v1/";
+   var username = "apiuser1";
+   var password = "gogogo";
+
+
+   //login api
+   $.ajax({
+      url: api_url+"categorie/1",
+      type: 'get',
+      username: username,
+      password: password,
+      success: function(data)
+      {
+      // response data
+      }
+   });
+   $.getJSON(api_url+"categorie", function(data) {
+         var result = data;
+         if(!result.error){ 
+            $.get("tpl/lapinou.tpl", function(data){
+               var tpl = data;
+
+               $.each(result.categories, function(key, categorie) {
+                  //console.log(key, categorie);
+                  var dataRender = {'id':categorie.id,'title':categorie.title}
+                  $("#promoList").append(Mustache.render(tpl, dataRender));
+               });
+            });
+         }
+   });
+
+});
 
 // MODAL LAPINOU
 $('.button-modal').click(function(){
 
    $('#myModal').css("display", "block");
+
+
 
 });
 $('.button-close').click(function(){
