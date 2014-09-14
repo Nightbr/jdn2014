@@ -19,9 +19,9 @@ Route::get('/', function()
 /* Groupe de routes pour le versioning d'API */
 Route::group(array('prefix' => 'v1', 'before' => 'auth.basic'), function()
 {
-  Route::resource('categorie', 'CategorieController', array('except' => array('create', 'edit', 'destroy')));
+  Route::resource('categorie', 'CategorieController', array('only' => array('index', 'show', 'showGuest')));
   Route::get("categorie/{id}/guest", array("uses" => "CategorieController@showGuest"));
-  Route::resource('guest', 'GuestController', array('except' => array('create', 'edit', 'destroy')));
+  Route::resource('guest', 'GuestController', array('only' => array('index', 'show', 'store')));
 });
 
 /* groupe de routes pour le système d'auth */

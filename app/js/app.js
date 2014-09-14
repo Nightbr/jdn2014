@@ -66,9 +66,11 @@ $(function() {
       password: password,
       success: function(data)
       {
-      // response data
+         // response data
       }
    });
+
+   // affichage liste des promos
    $.getJSON(api_url+"categorie", function(data) {
          var result = data;
          if(!result.error){ 
@@ -81,21 +83,15 @@ $(function() {
                   $("#promoList").append(Mustache.render(tpl, dataRender));
                });
             });
+
+            $("#promoList").on('click', '.button-modal', function(e){
+               $('#myModal').css("display", "block");
+            });
+
+            $('.button-close').on('click', function(e){
+               $('#myModal').css("display", "none");
+            });
          }
    });
-
-});
-
-// MODAL LAPINOU
-$('.button-modal').click(function(){
-
-   $('#myModal').css("display", "block");
-
-
-
-});
-$('.button-close').click(function(){
-
-   $('#myModal').css("display", "none");
 
 });
