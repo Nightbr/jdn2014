@@ -20,6 +20,7 @@ Route::get('/', function()
 Route::group(array('prefix' => 'v1', 'before' => 'auth.basic'), function()
 {
   Route::resource('categorie', 'CategorieController', array('except' => array('create', 'edit', 'destroy')));
+  Route::get("categorie/{id}/guest", array("uses" => "CategorieController@showGuest"));
   Route::resource('guest', 'GuestController', array('except' => array('create', 'edit', 'destroy')));
 });
 

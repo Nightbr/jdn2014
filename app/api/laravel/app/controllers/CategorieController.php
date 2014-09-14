@@ -83,6 +83,23 @@ class CategorieController extends \BaseController {
   		);
 	}
 
+   /**
+    * Display linked resource.
+    *
+    * @param  int  $id
+    * @return Response
+    */
+   public function showGuest($id)
+   {
+      $catGuests = Guest::where('categorie_id', $id)->get();
+ 
+      return Response::json(array(
+            'error' => false,
+            'guests' => $catGuests->toArray()),
+            200
+      );
+   }
+
 
 	/**
 	 * Show the form for editing the specified resource.

@@ -8,7 +8,7 @@ Le panel se situe à l'adresse `api/laravel/public/admin`.
 
 ## Accés au panel
 
-Pour accéder au panel d'adminstration, il faut disposer d'un compte utilisateur disposant du rôle Admin.
+Pour accéder au panel d'adminstration, il faut disposer d'un compte utilisateur disposant du rôle **admin**.
 
 ## Fonctionnalités du panel
 

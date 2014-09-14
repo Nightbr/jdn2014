@@ -18,6 +18,15 @@ voici les requêtes http pour récuperer/modifier une ou plusieurs Categories.
 | /categorie        | POST      | Ajoute une catégorie              | title, isInternal     | json      |
 | /categorie/{id}   | GET       | Récupère la catégorie {id}        | 					    | json      |
 | /categorie/{id}   | PUT       | Modifie la catégorie {id}         | title, isInternal     | json      |
+| /categorie/{id}/guest | GET   | Récupère les guests de la catégorie {id} |                | json      |
+
+-----------------
+
+Exemple de retour json :
+
+    {"error":false,"categorie":[{"id":1,"title":"test","isInternal":0}]}
+
+    {"error":true,"messages":{"isInternal":["validation.boolean"]}}
 
 ## Service Guests
 
@@ -35,3 +44,4 @@ voici les requêtes http pour récupérer/modifier un ou plusieurs Guests.
 ## Authentification
 
 L'API utilise la méthode Basic Auth pour gérer les utilisateurs qui y ont accés.
+L'utilisateur de l'API a un rôle **api**
