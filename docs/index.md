@@ -8,7 +8,7 @@ Développeur :
 
 ## 1. Installer le projet
 
-Installer les dépendances php avec composer.
+Installer les dépendances php avec [composer](https://getcomposer.org/download/).
 Dans app/api/laravel :
 
     composer.phar install
@@ -22,7 +22,9 @@ On ne se servira de grunt uniquement pour générer le dist, effectuer les tests
 Les urls :
 
 le site : `http://localhost/jdn2014/app/`
+
 l'api :   `http://localhost/jdn2014/app/api/laravel/public/v1`
+
 l'admin : `http://localhost/jdn2014/app/api/laravel/public/admin`
 
 

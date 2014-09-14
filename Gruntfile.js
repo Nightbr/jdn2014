@@ -15,27 +15,6 @@ module.exports = function (grunt) {
     // Time how long tasks take. Can help when optimizing build times
     require('time-grunt')(grunt);
 
-    var proxyMiddleware = function (connect, options) {
-        var middlewares = [];
-        var directory = options.directory || options.base[options.base.length - 1];
-        if (!Array.isArray(options.base)) {
-            options.base = [options.base];
-        }
-
-        // Setup the proxy
-        middlewares.push(require('grunt-connect-proxy/lib/utils').proxyRequest);
-
-        options.base.forEach(function(base) {
-            // Serve static files.
-            middlewares.push(connect.static(base));
-        });
-
-        // Make directory browse-able.
-        middlewares.push(connect.directory(directory));
-
-        return middlewares;
-    };
-
     // Define the configuration for all the tasks
     grunt.initConfig({
 
@@ -44,102 +23,6 @@ module.exports = function (grunt) {
             // Configurable paths
             app: 'app',
             dist: 'dist'
-        },
-
-        // Watches files for changes and runs tasks based on the changed files
-        watch: {
-            js: {
-                files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-                tasks: ['jshint'],
-                options: {
-                    livereload: true
-                }
-            },
-            gruntfile: {
-                files: ['Gruntfile.js']
-            },
-            styles: {
-                files: ['<%= yeoman.app %>/css/{,*/}*.css'],
-                tasks: ['newer:copy:styles', 'autoprefixer']
-            },
-            livereload: {
-                options: {
-                    livereload: '<%= connect.options.livereload %>'
-                },
-                files: [
-                    '<%= yeoman.app %>/*.html',
-                    '.tmp/css/{,*/}*.css',
-                    '<%= yeoman.app %>/images/{,*/}*.{gif,jpeg,jpg,png,svg,webp}'
-                ]
-            }
-        },
-
-        // The actual grunt server settings
-        connect: {
-            options: {
-                port: 9000,
-                livereload: 35729,
-                // Change this to '0.0.0.0' to access the server from outside
-                hostname: 'localhost',
-                middleware: proxyMiddleware
-            },
-            proxies: [
-                {
-                    context: '/api',
-                    host: 'localhost',
-                    port: 8000,
-                    rewrite: {
-                        '^/api': ''
-                    }
-                }
-            ],
-            livereload: {
-                options: {
-                    open: true,
-                    base: [
-                        '.tmp',
-                        '<%= yeoman.app %>'
-                    ],
-                    middleware: proxyMiddleware
-                }
-            },
-            test: {
-                options: {
-                    port: 9001,
-                    base: [
-                        '.tmp',
-                        'test',
-                        '<%= yeoman.app %>'
-                    ]
-                }
-            },
-            dist: {
-                options: {
-                    open: true,
-                    base: '<%= yeoman.dist %>',
-                    livereload: false,
-                    middleware: proxyMiddleware
-                }
-            }
-        },
-
-        // Grunt php server
-        php: {
-            options: {
-                port: 8000,
-                // Change this to '0.0.0.0' to access the server from outside.
-                hostname: '127.0.0.1'
-            },
-            server: {
-                options: {
-                    base: '<%= yeoman.app %>/api/laravel/public',
-                }
-            },
-            dist: {
-                options: {
-                    base: '<%= yeoman.dist %>/api/laravel/public',
-                }
-            }
         },
 
         // Empties folders to start fresh
@@ -169,14 +52,6 @@ module.exports = function (grunt) {
                     src: '{,*/}*.css',
                     dest: '.tmp/css/'
                 }]
-            }
-        },
-
-        // Automatically inject Bower components into the HTML file
-        'bower-install': {
-            app: {
-                html: '<%= yeoman.app %>/index.html',
-                ignorePath: '<%= yeoman.app %>/'
             }
         },
 
@@ -308,37 +183,6 @@ module.exports = function (grunt) {
             }
         },
 
-
-        // Generates a custom Modernizr build that includes only the tests you
-        // reference in your app
-        modernizr: {
-            devFile: '<%= yeoman.app %>/bower_components/modernizr/modernizr.js',
-            outputFile: '<%= yeoman.dist %>/bower_components/modernizr/modernizr.js',
-            files: [
-                '<%= yeoman.dist %>/scripts/{,*/}*.js',
-                '<%= yeoman.dist %>/styles/{,*/}*.css',
-                '!<%= yeoman.dist %>/scripts/vendor/*'
-            ],
-            uglify: true
-        },
-
-        // Run some tasks in parallel to speed up build process
-        concurrent: {
-            server: [
-                'compass:server',
-                'copy:styles'
-            ],
-            test: [
-                'copy:styles'
-            ],
-            dist: [
-                'compass',
-                'copy:styles',
-                'imagemin',
-                'svgmin',
-                'htmlmin'
-            ]
-        }
     });
 
 
