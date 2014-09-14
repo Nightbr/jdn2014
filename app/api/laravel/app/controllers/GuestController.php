@@ -45,16 +45,26 @@ class GuestController extends \BaseController {
 		$guest->categorie()->associate(Categorie::find(Request::get('categorie_id')));
 		//$guest->guest_id = Request::get('guest_id');
 		 
-		// La validation et le filtrage sont indispensables !!!
-		// Vraiment, je suis impardonnable de laisser ça comme ça...
-		 
-		$guest->save();
-		 
-		return Response::json(array(
-		    'error' => false,
-		    'guest' => $guest->toArray()),
-		    200
-		);
+		$validator = Validator::make(Input::all(), Guest::$rules);
+      if(!$validator->fails())
+      {
+         $guest->save();
+         return Response::json(array(
+             'error' => false,
+             'guest' => $guest->toArray()),
+             200
+         );
+      }
+      else
+      {
+         $messages = $validator->messages();
+         return Response::json(array(
+             'error' => true,
+             'guest' => null,
+             'messages' => $messages),
+             200
+         );
+      }
 	}
 
 
@@ -99,6 +109,18 @@ class GuestController extends \BaseController {
 	public function update($id)
 	{
 		$guest = Guest::find($id);
+
+      if(!$guest)
+      {
+         return Response::json(array(
+          'error' => true,
+          'messages' => 'user not found'),
+          200
+      );
+      }
+
+      $error = false;
+      $messages = 'guest updated';
  
 		if ( Request::get('firstname') )
 		{
@@ -112,12 +134,40 @@ class GuestController extends \BaseController {
 
 		if ( Request::get('email') )
 		{
-		    $guest->email = Request::get('email');
+         $validator = Validator::make(
+             array('email' => Request::get('email')),
+             array('email' => array('email'))
+         );
+
+         if(!$validator->fails())
+         {
+            $guest->email = Request::get('email');
+         }
+         else
+         {
+            $error = true;
+            $messages = $validator->messages();
+         }
+		    
 		}
 
-		if ( Request::get('isPaid') )
+		if ( Request::get('isPaid') || Request::get('isPaid') == 0 )
 		{
-		    $guest->isPaid = Request::get('isPaid');
+         $validator = Validator::make(
+             array('isPaid' => Request::get('isPaid')),
+             array('isPaid' => array('boolean'))
+         );
+
+         if(!$validator->fails())
+         {
+            $guest->isPaid = Request::get('isPaid');
+         }
+         else
+         {
+            $error = true;
+            $messages = $validator->messages();
+         }
+		    
 		}
 
 		if ( Request::get('categorie_id') )
@@ -128,8 +178,8 @@ class GuestController extends \BaseController {
 		$guest->save();
 
 		return Response::json(array(
-		    'error' => false,
-		    'message' => 'guest updated'),
+		    'error' => $error,
+		    'messages' => $messages),
 		    200
 		);
 	}

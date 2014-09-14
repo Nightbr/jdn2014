@@ -6,6 +6,11 @@ class Categorie extends Eloquent {
 
     public $timestamps = false;
 
+    public static $rules = array(
+      'title'             => 'required',
+      'isInternal'        => 'required|boolean',
+   );
+
 
     public function guests()
     {

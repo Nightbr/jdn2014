@@ -40,17 +40,27 @@ class CategorieController extends \BaseController {
 		$categorie = new Categorie;
 		$categorie->title = Request::get('title');
 		$categorie->isInternal = Request::get('isInternal');
-		 
-		// La validation et le filtrage sont indispensables !!!
-		// Vraiment, je suis impardonnable de laisser ça comme ça...
-		 
-		$categorie->save();
-		 
-		return Response::json(array(
-		    'error' => false,
-		    'categorie' => $categorie->toArray()),
-		    200
-		);
+
+      $validator = Validator::make(Input::all(), Categorie::$rules);
+		if(!$validator->fails())
+      {
+   		$categorie->save();
+   		return Response::json(array(
+   		    'error' => false,
+   		    'categorie' => $categorie->toArray()),
+   		    200
+   		);
+      }
+      else
+      {
+         $messages = $validator->messages();
+         return Response::json(array(
+             'error' => true,
+             'categorie' => null,
+             'messages' => $messages),
+             200
+         );
+      }
 	}
 
 
@@ -95,22 +105,39 @@ class CategorieController extends \BaseController {
 	public function update($id)
 	{
 		$categorie = Categorie::find($id);
+
+      $error = false;
+      $messages = "categorie updated";
  
 		if ( Request::get('title') )
 		{
 		    $categorie->title = Request::get('title');
 		}
 
-		if ( Request::get('isInternal') )
+		if ( Request::get('isInternal') || Request::get('isInternal') == 0)
 		{
-		    $categorie->isInternal = Request::get('isInternal');
+         $validator = Validator::make(
+             array('isInternal' => Request::get('isInternal')),
+             array('isInternal' => array('boolean'))
+         );
+
+         if(!$validator->fails())
+         {
+		      $categorie->isInternal = Request::get('isInternal');
+         }
+         else
+         {
+            $error = true;
+            $messages = $validator->messages();
+         }
 		}
+
 
 		$categorie->save();
 
 		return Response::json(array(
-		    'error' => false,
-		    'message' => 'categorie updated'),
+		    'error' => $error ,
+		    'messages' => $messages),
 		    200
 		);
 	}
