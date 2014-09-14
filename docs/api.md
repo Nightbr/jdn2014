@@ -24,7 +24,11 @@ voici les requêtes http pour récuperer/modifier une ou plusieurs Categories.
 
 Exemple de retour json :
 
+    GET api/laravel/public/v1/categorie/1
+
     {"error":false,"categorie":[{"id":1,"title":"test","isInternal":0}]}
+
+    PUT api/laravel/public/v1/categorie/1?isInternal=sqdq
 
     {"error":true,"messages":{"isInternal":["validation.boolean"]}}
 

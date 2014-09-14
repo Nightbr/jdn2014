@@ -8,16 +8,23 @@ Développeur :
 
 ## 1. Installer le projet
 
-    grunt install
-    bower install
+Installer les dépendances php avec composer.
+Dans app/api/laravel :
+
+    composer.phar install
 
 ## 2. Lancer un serveur
-
-    grunt serve
 
 Note Importante : Sachant que le Basic Auth ne fonctionne pas avec php CGI utilisé par le module grunt-php, il faut mettre l'ensemble du projet dans un environnement de dev (WAMP, MAMP, LAMP, ...). Et du coup, plus besoin d'utiliser le grunt serve.
 
 On ne se servira de grunt uniquement pour générer le dist, effectuer les tests, compiler le sass, ...
+
+Les urls :
+
+le site : `http://localhost/jdn2014/app/`
+l'api :   `http://localhost/jdn2014/app/api/laravel/public/v1`
+l'admin : `http://localhost/jdn2014/app/api/laravel/public/admin`
+
 
 ## 3. Dev note
 
