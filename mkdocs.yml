@@ -5,3 +5,4 @@ site_dir: docsWeb
 pages:
 - [index.md, Home]
 - [api.md, API]
+- [admin.md, Admin]
