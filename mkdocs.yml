@@ -1,0 +1,7 @@
+site_name: jdnApp
+repo_url: https://github.com/Nightbr/jdn2014
+site_dir: docsWeb
+#theme: readthedocs
+pages:
+- [index.md, Home]
+- [api.md, API]
