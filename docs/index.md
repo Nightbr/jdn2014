@@ -23,7 +23,7 @@ On ne se servira de grunt uniquement pour générer le dist, effectuer les tests
 
 1. Basic Auth ne fonctionne pas avec le module grunt-php... Il faut donc utiliser un serveur php de dev (WAMP, MAMP, LAMP, ...) Pour être sûre de ne pas avoir d'erreur lors de l'authentification : Invalid credentials Solution alternative à chercher...
 
-2. Pour tester l'API REST, utiliser POSTMAN uniquement sur Chrome
+2. Pour tester l'API REST, utiliser [POSTMAN](http://www.getpostman.com/) uniquement sur Chrome
 
 ## 4. Laravel :
 
