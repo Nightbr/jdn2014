@@ -64,34 +64,60 @@ $(function() {
       type: 'get',
       username: username,
       password: password,
-      success: function(data)
+      success: function()
       {
-         // response data
+         // on est authentifié
+         // affichage liste des promos
+         $.getJSON(api_url+"categorie", function(data) {
+               var result = data;
+               if(!result.error){ 
+                  $.get("tpl/lapinou.tpl", function(data){
+                     var tpl = data;
+
+                     $.each(result.categories, function(key, categorie) {
+                        //console.log(key, categorie);
+                        var dataRender = {'id':categorie.id,'title':categorie.title}
+                        $("#promoList").append(Mustache.render(tpl, dataRender));
+                     });
+                  });
+
+                  // gestion du modal
+                  $("#promoList").on('click', '.button-modal', function(e){
+                     var id = $(this).data('id');
+                     var title = $(this).data('title');
+                     //console.log(id);
+
+                     $.getJSON(api_url+"categorie/"+id+"/guest", function(data) {
+                        //console.log(data);
+                        var result = data;
+                        if(!result.error){ 
+                           $.get("tpl/modal.tpl", function(data){
+                              var tpl = data;
+                              var dataRender = new Array();
+                              dataRender['title'] = title;
+                              dataRender['count'] = result.guests.length;
+                              dataRender['guests'] = new Array();
+
+                              $.each(result.guests, function(key, guest) {
+                                 //console.log(key, guest);
+                                 dataRender['guests'].push({'firstname':guest.firstname,'lastname':guest.lastname});
+                                 
+                              });
+                              //console.log(dataRender);
+                              $("#promoModal").html(Mustache.render(tpl, dataRender));
+                           });
+                        }
+                     });
+
+                  $("#promoModal").on('click', '.button-close', function(e){
+                     $("#promoModal").html(" ");
+                  });
+
+                  });
+               }
+         });
       }
    });
 
-   // affichage liste des promos
-   $.getJSON(api_url+"categorie", function(data) {
-         var result = data;
-         if(!result.error){ 
-            $.get("tpl/lapinou.tpl", function(data){
-               var tpl = data;
-
-               $.each(result.categories, function(key, categorie) {
-                  //console.log(key, categorie);
-                  var dataRender = {'id':categorie.id,'title':categorie.title}
-                  $("#promoList").append(Mustache.render(tpl, dataRender));
-               });
-            });
-
-            $("#promoList").on('click', '.button-modal', function(e){
-               $('#myModal').css("display", "block");
-            });
-
-            $('.button-close').on('click', function(e){
-               $('#myModal').css("display", "none");
-            });
-         }
-   });
 
 });

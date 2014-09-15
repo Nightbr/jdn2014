@@ -7,7 +7,7 @@
                Ceci est un test, copier les lapinous si fonctionnel... ;) 
                Le modal se trouve en dessous des lapinous pour modifs-->
            <br/> <br/>
-         <button class="btn btn-danger btn-lg button-modal"  data-target="#myModal" data-id="{{id}}">
+         <button class="btn btn-danger btn-lg button-modal"  data-target="#myModal" data-id="{{id}}" data-title="{{title}}">
             Voir la liste
          </button>   
         </div>     
