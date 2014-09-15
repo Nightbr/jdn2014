@@ -132,6 +132,8 @@ $(document).ready(function() {
 		$('html, body').stop().animate({
 			scrollTop : 0
 		}, 1500, 'easeInOutExpo');
+
+      return false;
 	});
 
 });
