@@ -33,6 +33,22 @@ Exemple de retour json :
 
     {"error":true,"messages":{"isInternal":["validation.boolean"]}}
 
+
+## Service Tables
+
+Les Tables correspondent aux tables pour faciliter la création du plan de table.
+
+voici les requêtes http pour récupérer/modifier une ou plusieurs Tables.
+
+| URI           | Méthode   | Action                    | Paramètre                                         | Retour    |
+|-------------  |---------  |-------------------------- |-------------------------------------------------- |--------   |
+| /table        | GET       | Récupère tous les tables  |                                                   | json      |
+| /table        | POST      | Ajoute une table          | title, max_chairs, is_Full                        | json      |
+| /table/{id]   | GET       | Rècupère le table {id}    |                                                   | json      |
+| /table/{id}   | PUT       | Modifie la table {id}     | title, max_chairs, is_Full                        | json      |
+| /table/{id]   | DELETE    | Supprime la table {id}    |                                                   | json      |
+
+
 ## Service Guests
 
 Les Guests correspondent aux invités qui se sont inscrit pour la jdn.
@@ -62,9 +78,11 @@ Mais on peut choisir ce qu'on souhaite avoir comme action via le fichier `routes
     /* Groupe de routes pour le versioning d'API */
     Route::group(array('prefix' => 'v1', 'before' => 'auth.basic'), function()
     {
-      Route::resource('categorie', 'CategorieController', array('only' => array('index', 'show', 'showGuest')));
-      Route::get("categorie/{id}/guest", array("uses" => "CategorieController@showGuest"));
-      Route::resource('guest', 'GuestController', array('only' => array('index', 'show', 'store')));
+        Route::resource('categorie', 'CategorieController', array('only' => array('index', 'show', 'showGuest')));
+        Route::get("categorie/{id}/guest", array("uses" => "CategorieController@showGuest"));
+        Route::resource('table', 'TableController', array('only' => array('index', 'show', 'showGuest')));
+        Route::get("table/{id}/guest", array("uses" => "TableController@showGuest"));
+        Route::resource('guest', 'GuestController', array('only' => array('index', 'show', 'store')));
     });
 
 

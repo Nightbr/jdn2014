@@ -79,6 +79,8 @@ $(function() {
                         //console.log(key, categorie);
                         var dataRender = {'id':categorie.id,'title':categorie.title}
                         $("#promoList").append(Mustache.render(tpl, dataRender));
+                        // construction de la liste du form d'inscription
+                        $("#categorie").append('<option value="'+categorie.id+'">'+categorie.title+'</option>'); 
                      });
                   });
 

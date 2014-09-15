@@ -27,6 +27,12 @@ Les Categories correspondent aux différentes années à l'école (promo L1, pro
 
 Toutes les informations de chaque Categorie sont affichées.
 
+## Service Tables
+
+Les Tables correspondent aux tables pour faciliter la création du plan de table.
+
+Toutes les informations de chaque Tables sont affichées.
+
 ## Service Guests
 
 Les Guests correspondent aux invités qui se sont inscrit pour la jdn.

@@ -21,6 +21,8 @@ Route::group(array('prefix' => 'v1', 'before' => 'auth.basic'), function()
 {
   Route::resource('categorie', 'CategorieController', array('only' => array('index', 'show', 'showGuest')));
   Route::get("categorie/{id}/guest", array("uses" => "CategorieController@showGuest"));
+  Route::resource('table', 'TableController', array('only' => array('index', 'show', 'showGuest')));
+  Route::get("table/{id}/guest", array("uses" => "TableController@showGuest"));
   Route::resource('guest', 'GuestController', array('only' => array('index', 'show', 'store')));
 });
 

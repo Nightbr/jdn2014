@@ -24,6 +24,11 @@ return array(
 			'relationship' => 'categorie',
 			'select' =>'(:table).title',
 		),
+      'table'=> array(
+         'title' => 'Table',
+         'relationship' => 'table',
+         'select' =>'(:table).title',
+      ),
 	),
 	'edit_fields' =>array(
 		'firstname' =>array(
@@ -46,7 +51,12 @@ return array(
 			'title' => 'Categorie',
 			'type' => 'relationship',
 			'name_field' =>'title',
-	),
+	   ),
+      'table'=> array(
+         'title' => 'Table',
+         'type' => 'relationship',
+         'name_field' =>'title',
+      ),
 	),
 	'filters' => array(
 		'isPaid' =>array(
@@ -58,6 +68,11 @@ return array(
 			'type' => 'relationship',
 			'name_field' =>'title',
 		),
+      'table'=> array(
+         'title' => 'Table',
+         'type' => 'relationship',
+         'name_field' =>'title',
+      ),
 	),
 	'sort' =>array(
 		'field' =>'categorie',
@@ -66,13 +81,7 @@ return array(
 	'link' =>function($model){
 		return URL::route('v1.guest.show', $model->id);
 	},
-	'rules' => array(
-		'firstname' => 'required',
-		'lastname' => 'required',
-		'email' => 'required|email',
-		'isPaid' => 'required',
-		
-	),
+	'rules' => Guest::$rules
 
 );
 

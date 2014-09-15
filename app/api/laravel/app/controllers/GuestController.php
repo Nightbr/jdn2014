@@ -42,7 +42,8 @@ class GuestController extends \BaseController {
 		$guest->lastname = Request::get('lastname');
 		$guest->email = Request::get('email');
 		$guest->isPaid = Request::get('isPaid');
-		$guest->categorie()->associate(Categorie::find(Request::get('categorie_id')));
+      $guest->categorie()->associate(Categorie::find(Request::get('categorie_id')));
+		$guest->table()->associate(Table::find(Request::get('table_id')));
 		//$guest->guest_id = Request::get('guest_id');
 		 
 		$validator = Validator::make(Input::all(), Guest::$rules);

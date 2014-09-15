@@ -20,10 +20,10 @@ class CreateGuestTable extends Migration {
 		    $table->string('email');
 		    $table->boolean('isPaid');
 		    $table->integer('categorie_id')->unsigned();
-		    //$table->integer('guest_id')->unsigned()->nullable();
+		    $table->integer('table_id')->unsigned();
 		    $table->timestamps();
 		    $table->foreign('categorie_id')->references('id')->on('categories');
-		    //$table->foreign('guest_id')->references('id')->on('guests');
+		    $table->foreign('table_id')->references('id')->on('tables');
 		});
 	}
 

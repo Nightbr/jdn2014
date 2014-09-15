@@ -6,6 +6,9 @@ return array(
 	'single' => 'Categorie',
 	'model' => 'Categorie',
 	'columns' => array(
+      'id' => array(
+         'title' => 'id',
+      ),
 		'title' => array(
 			'title' => 'Title',
 		),

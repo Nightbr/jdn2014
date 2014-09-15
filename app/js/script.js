@@ -1,7 +1,7 @@
 //Preloader
 $(window).load(function() {
-	$("#intro-loader").delay(1000).fadeOut();
-	$(".mask").delay(1000).fadeOut("slow");
+	$("#intro-loader").delay(500).fadeOut();
+	$(".mask").delay(500).fadeOut("slow");
 });
 
 $(document).ready(function() {
