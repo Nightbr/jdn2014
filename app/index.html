@@ -258,6 +258,9 @@
          62300, Lens
          </div>
          Paiement sur place possible, file d'attente séparée.<hr/>
+         <div id="infoDiv">
+         
+         </div>
 				 
 				<form method="post" name="inscriptionform" id="inscrform" class="validate item_left" role="form">									                   
                <div class="form-group">										
@@ -275,14 +278,18 @@
                   </div>
                   <div class="col-md-6">                                
                      <label for="categorie">Categorie/Promotion</label>
-                     <select id="categorie" name="categorie" class="form-control input-lg required" placeholder="Votre Categorie/Promotion">
+                     <select id="categorie" name="categorie_id" class="form-control input-lg required" placeholder="Votre Categorie/Promotion">
+                     </select>
+                  </div>
+                  <div class="col-md-6">                                
+                     <label for="table">Table</label>
+                     <select id="table" name="table_id" class="form-control input-lg required" placeholder="Votre Table">
                      </select>
                   </div>
                </div>
               <div class="form-group">										
-                <div class="col-md-12 text-right">		
-                  <br/>									
-                  <input type="submit" id="contactForm_submit" class="btn btn-dark" value="S'inscrire">										
+                <div class="col-md-12 text-right">								
+                  <input type="submit" id="inscrform_submit" class="btn btn-dark" value="S'inscrire">										
                 </div>									
               </div>                  
               <input type="hidden" name="subject" value="Contact from your site">								

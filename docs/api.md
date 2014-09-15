@@ -55,13 +55,13 @@ Les Guests correspondent aux invités qui se sont inscrit pour la jdn.
 
 voici les requêtes http pour récupérer/modifier un ou plusieurs Guests.
 
-| URI         	| Méthode 	| Action                   	| Paramètre                                        	| Retour 	|
-|-------------	|---------	|--------------------------	|--------------------------------------------------	|--------	|
-| /guest      	| GET     	| Récupère tous les guests 	|                                                  	| json   	|
-| /guest      	| POST    	| Ajoute un guest          	| firstname, lastname, email, isPaid, categorie_id 	| json   	|
-| /guest/{id] 	| GET     	| Rècupère le guest {id}   	|                                                  	| json   	|
-| /guest/{id} 	| PUT     	| Modifie le guest {id}    	| firstname, lastname, email, isPaid, categorie_id 	| json     	|
-| /guest/{id]   | DELETE    | Supprime le guest {id}    |                                                   | json      |
+| URI         	| Méthode 	| Action                   	| Paramètre                                        	            | Retour 	|
+|-------------	|---------	|--------------------------	|-------------------------------------------------------------  |--------	|
+| /guest      	| GET     	| Récupère tous les guests 	|                                                  	            | json   	|
+| /guest      	| POST    	| Ajoute un guest          	| firstname, lastname, email, isPaid, categorie_id, table_id    | json   	|
+| /guest/{id] 	| GET     	| Rècupère le guest {id}   	|                                                  	            | json   	|
+| /guest/{id} 	| PUT     	| Modifie le guest {id}    	| firstname, lastname, email, isPaid, categorie_id, table_id    | json     	|
+| /guest/{id]   | DELETE    | Supprime le guest {id}    |                                                               | json      |
 
 
 ## Authentification

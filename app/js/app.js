@@ -119,7 +119,70 @@ $(function() {
                   });
                }
          });
+
+
+         //formulaire d'inscription
+         inscFormInit(api_url);
+
+         
       }
+   });
+
+   // Inscription Form Request
+   var inscrform = $('#inscrform');
+   var submit = $('#inscrform_submit');
+   var infoDiv = $('#infoDiv');
+
+   inscrform.validate();  
+
+   // form submit event
+    $(document).on('submit', '#inscrform', function(e) {
+      e.preventDefault(); // prevent default form submit
+      // sending ajax request through jQuery
+      //console.log(inscrform);
+      $.ajax({
+         url: api_url+'guest', 
+         type: 'POST', 
+         data: inscrform.serialize()+"&isPaid=0",
+         success: function(data) {
+            inscrform.fadeOut(300);
+            if(!data.error){
+               var currentTable = data.guest.table;
+               $.getJSON(api_url+"table/"+currentTable.id+"/guest", function(data) {
+                  var remains_chairs = currentTable.max_chairs - data.guests.length ;
+                  if(remains_chairs<=0)
+                  {
+                     $.ajax(api_url+"table/"+currentTable.id, {type: 'PUT',data: {'is_full':1}, success: function(data){
+                        //console.log(data);
+                     }
+                     });
+                  }
+               });
+
+               infoDiv.html("Vous avez bien été inscrit, merci de régler les frais d'inscription le plus vite possible."); // fade in response data     
+               infoDiv.fadeIn(100);
+               setTimeout(function() {
+                  infoDiv.fadeOut(300);
+                  inscFormInit(api_url);
+                  $('#firstname, #email, #lastname, #table, #categorie').val('');
+                  inscrform.fadeIn(1800);
+               }, 4000 );  
+            }
+            else
+            {
+               infoDiv.html("Erreur lors de l'inscription !!"); // fade in response data     
+               infoDiv.fadeIn(100);
+               setTimeout(function() {
+                  infoDiv.fadeOut(300);
+                  inscrform.fadeIn(1800);
+               }, 4000 );
+            }
+
+         },
+         error: function(e) {
+            console.log(e)
+         }
+      });
    });
 
 
@@ -177,3 +240,24 @@ $(function() {
 
 
 });
+
+
+function inscFormInit(api_url){
+   $('#table').html('');
+
+   $.getJSON(api_url+"table", function(data) {
+      var result = data;
+      if(!result.error){ 
+         
+         $.each(result.tables, function(key, table) {
+            // construction de la liste du form d'inscription
+            if(!table.is_full){
+               $.getJSON(api_url+"table/"+table.id+"/guest", function(data) {
+                  var remains_chairs = table.max_chairs - data.guests.length ;
+                  $("#table").append('<option value="'+table.id+'">'+table.title+' (Il reste '+remains_chairs+' place(s) à cette table)</option>'); 
+               });
+            }
+         });
+      }
+   });
+}

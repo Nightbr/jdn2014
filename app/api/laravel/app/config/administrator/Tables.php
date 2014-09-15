@@ -27,7 +27,7 @@ return array(
          'type' =>'text',
       ),
       'is_full'=> array(
-         'title' => 'Is Internal',
+         'title' => 'Is Full',
          'type' => 'bool',
       ),
    ),
