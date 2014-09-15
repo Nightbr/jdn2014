@@ -293,23 +293,29 @@
             <form method="post" name="contactform" id="contactform" class="validate item_left" role="form">									                   
               <div class="form-group">										
                 <div class="col-md-6">										
-                  <label for="name">Nom</label>										
-                  <input type="text" name="name" id="name" class="form-control input-lg required" placeholder="Enter name">										
+                  <label for="name">Prénom NOM</label>										
+                  <input type="text" name="name" id="name" class="form-control input-lg required" placeholder="Votre Prénom NOM">										
                 </div>										
                 <div class="col-md-6">											
                   <label for="email">Email</label>										
-                  <input type="email" name="email" id="email" class="form-control input-lg required email" placeholder="Enter email">										
+                  <input type="email" name="email" id="email" class="form-control input-lg required email" placeholder="Votre email">										
                 </div>									
-              </div>									
+              </div>		
+              <div class="form-group">                            
+                <div class="col-md-12">                              
+                  <label for="subject">Sujet</label>                              
+                  <input name="subject" type="text" id="subject" class="form-control input-lg required" placeholder="Votre sujet">                          
+                </div>                          
+              </div>                							
               <div class="form-group">										
                 <div class="col-md-12">										
                   <label for="message">Message</label>										
-                  <textarea name="message" id="message" class="form-control input-lg required" rows="9" placeholder="Enter Message"></textarea>										
+                  <textarea name="message" id="message" class="form-control input-lg required" rows="9" placeholder="Votre Message"></textarea>										
                 </div>									
               </div>									
               <div class="form-group">										
                 <div class="col-md-12 text-right">											
-                  <input type="submit" id="contactForm_submit" class="btn btn-dark" value="Submit">										
+                  <input type="submit" id="contactForm_submit" class="btn btn-dark" value="Envoyer">										
                 </div>									
               </div>                  
               <input type="hidden" name="subject" value="Contact from your site">								
@@ -321,30 +327,31 @@
             <ul class="contact-info">					
               <li>
               <i class="fa fa-map-marker"></i>
-              <span>13 rue Jean Souvraz
-                <br>Lens, France
+              <span>BDE IG2I, Comité JDN 2013, <br />
+                13 Rue Jean Souvraz, <br />
+                62300 Lens
               </span>
               </li>					
               <li>
               <i class="fa fa-phone"></i>
-              <span>+1 666666666 TODO
+              <span>03 21 74 85 85
               </span>
               </li>          
-              <li>
+              <!--<li>
               <i class="fa fa-mobile"></i>
               <span>+0 6666666666 TODO
               </span>
-              </li>					
+              </li>-->					
               <li>
               <i class="fa fa-envelope"></i>
               <span>
-                <a  class="contactlink" href="mailto:">jdn@example.comTODO</a>
+                <a  class="contactlink" href="mailto:jdn2014@ig2i.fr">jdn2014@ig2i.fr</a>
               </span>
               </li>					
               <li>
               <i class="fa fa-globe"></i>
               <span>
-                <a class="contactlink" href="http://www.ig2i.fr">www.ig2i.fr</a>
+                <a class="contactlink" href="http://www.ig2i.fr">Visiter le site web de l' IG<small>2</small>I</a>
               </span>
               </li>				
             </ul>

@@ -51,6 +51,7 @@ $('[data-spy="scroll"]').each(function () {
 
 
 $(function() {
+//Main App JS - TB
 
    // à voir pour la sécu...
    var api_url = "http://localhost/jdn2014/app/api/laravel/public/v1/";
@@ -117,6 +118,55 @@ $(function() {
                }
          });
       }
+   });
+
+
+   // Contact Form Request
+   var form = $('#contactform');
+   var submit = $('#contactForm_submit'); 
+   var alertx = $('.form-respond'); 
+
+   form.validate();  
+
+   // form submit event
+    $(document).on('submit', '#contactform', function(e) {
+      e.preventDefault(); // prevent default form submit
+      // sending ajax request through jQuery
+      $.ajax({
+         url: 'api/formContact.php', 
+         type: 'POST', 
+         dataType: 'html',
+         data: form.serialize(), 
+         beforeSend: function() {
+            alertx.fadeOut();
+            submit.html('Sending....'); // change submit button text
+         },
+         success: function(data) {
+            form.fadeOut(300);
+            if(data.success){
+               alertx.html(data.message); // fade in response data     
+               alertx.fadeIn(1000);
+               setTimeout(function() {
+                  alertx.html(data.message).fadeOut(300);
+                  $('#name, #email, #message, #subject').val('');
+                  form.fadeIn(1800);
+               }, 4000 );  
+            }
+            else
+            {
+               alertx.html(data.errors); // fade in response data     
+               alertx.fadeIn(1000);
+               setTimeout(function() {
+                  alertx.html(data.errors).fadeOut(300);
+                  form.fadeIn(1800);
+               }, 4000 );
+            }
+
+         },
+         error: function(e) {
+            console.log(e)
+         }
+      });
    });
 
 

@@ -63,52 +63,6 @@ $(document).ready(function() {
 
   /*rotate('rotate1');*/
 
-	
-
-
-
-
-	       
-
-
-		
-		
-
-	// Contact Form Request
-  $(".validate").validate();	
-  var form = $('#contactform');
-	var submit = $('#contactForm_submit');	
-	var alertx = $('.form-respond'); 
-
-  	// form submit event
-    $(document).on('submit', '#contactform', function(e) {
-		e.preventDefault(); // prevent default form submit
-		// sending ajax request through jQuery
-		$.ajax({
-			url: 'sendemail.php', 
-			type: 'POST', 
-			dataType: 'html',
-			data: form.serialize(), 
-			beforeSend: function() {
-				alertx.fadeOut();
-				submit.html('Sending....'); // change submit button text
-			},
-			success: function(data) {
-				form.fadeOut(300);
-        alertx.html(data).fadeIn(1000); // fade in response data     
-            setTimeout(function() {
-          alertx.html(data).fadeOut(300);
-          $('#name, #email, #message').val('')
-          form.fadeIn(1800);
-       }, 4000 );  
-
-			},
-			error: function(e) {
-				console.log(e)
-			}
-		});
-	});
-
 
 	//Navigation Dropdown
 	$('.nav a.collapse-menu').click(function() {
