@@ -45,10 +45,10 @@ if (empty($request->message))
 
         $header  = "MIME-Version: 1.0" . "\r\n";
         $header .= "Content-type:text/html;charset=utf-8" . "\r\n";
-        $header .= "From: ".htmlentities($request->usermail)." \r\n";
+        $header .= "From: ".htmlentities($request->email)." \r\n";
 
         try {
-            mail($receiver, $subject, $message, $header);
+            //mail($receiver, $subject, $message, $header);
             $data['success'] = true;
             $data['message'] = 'Merci, le message a bien été envoyé, nous vous répondrons le plus rapidement possible.';
 

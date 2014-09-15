@@ -132,11 +132,15 @@ $(function() {
     $(document).on('submit', '#contactform', function(e) {
       e.preventDefault(); // prevent default form submit
       // sending ajax request through jQuery
+      //console.log(form.serializeArray());
+      var formData = {};
+      form.serializeArray().map(function(x){formData[x.name] = x.value;}); 
       $.ajax({
          url: 'api/formContact.php', 
          type: 'POST', 
-         dataType: 'html',
-         data: form.serialize(), 
+         dataType: 'json',
+         data: JSON.stringify(formData), 
+         contentType: 'application/json; charset=utf-8',
          beforeSend: function() {
             alertx.fadeOut();
             submit.html('Sending....'); // change submit button text
@@ -145,7 +149,7 @@ $(function() {
             form.fadeOut(300);
             if(data.success){
                alertx.html(data.message); // fade in response data     
-               alertx.fadeIn(1000);
+               alertx.fadeIn(100);
                setTimeout(function() {
                   alertx.html(data.message).fadeOut(300);
                   $('#name, #email, #message, #subject').val('');
@@ -155,7 +159,7 @@ $(function() {
             else
             {
                alertx.html(data.errors); // fade in response data     
-               alertx.fadeIn(1000);
+               alertx.fadeIn(100);
                setTimeout(function() {
                   alertx.html(data.errors).fadeOut(300);
                   form.fadeIn(1800);
