@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+
+        <title>API - jdnApp</title>
+
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.0.3.css" rel="stylesheet">
+        <link href="../css/prettify-1.0.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+
+        
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+            <a class="navbar-brand" href="..">jdnApp</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+            
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../installation/">Installation</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../security/">Sécurité</a>
+                    </li>
+                
+                
+                
+                    <li class="active">
+                        <a href="./">API</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../admin/">Admin</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="../howto/">How-to</a>
+                    </li>
+                
+                
+                </ul>
+            
+
+            
+            <!-- Search, Navigation and Repo links -->
+            <ul class="nav navbar-nav navbar-right">
+                
+                
+                <li >
+                    <a rel="next" href="../security/">
+                        <i class="fa fa-arrow-left"></i> Previous
+                    </a>
+                </li>
+                <li >
+                    <a rel="prev" href="../admin/">
+                        Next <i class="fa fa-arrow-right"></i>
+                    </a>
+                </li>
+                
+                
+                <li>
+                    <a href="https://github.com/Nightbr/jdn2014">
+                        
+                            <i class="fa fa-github"></i>
+                        
+                        GitHub
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+            <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+    
+        <li class="main active"><a href="#api-rest">API REST</a></li>
+        
+            <li><a href="#localisation-de-lapi">localisation de l'API</a></li>
+        
+            <li><a href="#service-categories">Service Categories</a></li>
+        
+            <li><a href="#service-tables">Service Tables</a></li>
+        
+            <li><a href="#service-guests">Service Guests</a></li>
+        
+            <li><a href="#authentification">Authentification</a></li>
+        
+            <li><a href="#securite">Sécurité</a></li>
+        
+    
+    </ul>
+</div></div>
+            <div class="col-md-9" role="main">
+
+<h1 id="api-rest">API REST</h1>
+<p>Voici la liste complète des services qu'offre l'API REST de l'application JdnApp.</p>
+<h2 id="localisation-de-lapi">localisation de l'API</h2>
+<p>L'api se situe à l'adresse <code>api/laravel/public/v1/</code></p>
+<h2 id="service-categories">Service Categories</h2>
+<p>Les Categories correspondent aux différentes années à l'école (promo L1, promo L2, ... promo 2014).</p>
+<p>voici les requêtes http pour récuperer/modifier une ou plusieurs Categories.</p>
+<table>
+<thead>
+<tr>
+<th>URI</th>
+<th>Méthode</th>
+<th>action</th>
+<th>Paramètre</th>
+<th>Retour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/categorie</td>
+<td>GET</td>
+<td>Récupère toutes les catégories</td>
+<td></td>
+<td>json</td>
+</tr>
+<tr>
+<td>/categorie</td>
+<td>POST</td>
+<td>Ajoute une catégorie</td>
+<td>title, isInternal</td>
+<td>json</td>
+</tr>
+<tr>
+<td>/categorie/{id}</td>
+<td>GET</td>
+<td>Récupère la catégorie {id}</td>
+<td></td>
+<td>json</td>
+</tr>
+<tr>
+<td>/categorie/{id}</td>
+<td>PUT</td>
+<td>Modifie la catégorie {id}</td>
+<td>title, isInternal</td>
+<td>json</td>
+</tr>
+<tr>
+<td>/categorie/{id}/guest</td>
+<td>GET</td>
+<td>Récupère les guests de la catégorie {id}</td>
+<td></td>
+<td>json</td>
+</tr>
+<tr>
+<td>/categorie/{id}</td>
+<td>DELETE</td>
+<td>Supprime la catégorie {id}</td>
+<td></td>
+<td>json</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>Exemple de retour json :</p>
+<pre class="prettyprint well"><code>GET api/laravel/public/v1/categorie/1
+
+{"error":false,"categorie":[{"id":1,"title":"test","isInternal":0}]}
+
+PUT api/laravel/public/v1/categorie/1?isInternal=sqdq
+
+{"error":true,"messages":{"isInternal":["validation.boolean"]}}
+</code></pre>
+<h2 id="service-tables">Service Tables</h2>
+<p>Les Tables correspondent aux tables pour faciliter la création du plan de table.</p>
+<p>voici les requêtes http pour récupérer/modifier une ou plusieurs Tables.</p>
+<table>
+<thead>
+<tr>
+<th>URI</th>
+<th>Méthode</th>
+<th>Action</th>
+<th>Paramètre</th>
+<th>Retour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/table</td>
+<td>GET</td>
+<td>Récupère tous les tables</td>
+<td></td>
+<td>json</td>
+</tr>
+<tr>
+<td>/table</td>
+<td>POST</td>
+<td>Ajoute une table</td>
+<td>title, max_chairs, is_Full</td>
+<td>json</td>
+</tr>
+<tr>
+<td>/table/{id]</td>
+<td>GET</td>
+<td>Rècupère le table {id}</td>
+<td></td>
+<td>json</td>
+</tr>
+<tr>
+<td>/table/{id}</td>
+<td>PUT</td>
+<td>Modifie la table {id}</td>
+<td>title, max_chairs, is_Full</td>
+<td>json</td>
+</tr>
+<tr>
+<td>/table/{id]</td>
+<td>DELETE</td>
+<td>Supprime la table {id}</td>
+<td></td>
+<td>json</td>
+</tr>
+</tbody>
+</table>
+<h2 id="service-guests">Service Guests</h2>
+<p>Les Guests correspondent aux invités qui se sont inscrit pour la jdn.</p>
+<p>voici les requêtes http pour récupérer/modifier un ou plusieurs Guests.</p>
+<table>
+<thead>
+<tr>
+<th>URI</th>
+<th>Méthode</th>
+<th>Action</th>
+<th>Paramètre</th>
+<th>Retour</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/guest</td>
+<td>GET</td>
+<td>Récupère tous les guests</td>
+<td></td>
+<td>json</td>
+</tr>
+<tr>
+<td>/guest</td>
+<td>POST</td>
+<td>Ajoute un guest</td>
+<td>firstname, lastname, email, isPaid, categorie_id, table_id</td>
+<td>json</td>
+</tr>
+<tr>
+<td>/guest/{id]</td>
+<td>GET</td>
+<td>Rècupère le guest {id}</td>
+<td></td>
+<td>json</td>
+</tr>
+<tr>
+<td>/guest/{id}</td>
+<td>PUT</td>
+<td>Modifie le guest {id}</td>
+<td>firstname, lastname, email, isPaid, categorie_id, table_id</td>
+<td>json</td>
+</tr>
+<tr>
+<td>/guest/{id]</td>
+<td>DELETE</td>
+<td>Supprime le guest {id}</td>
+<td></td>
+<td>json</td>
+</tr>
+</tbody>
+</table>
+<h2 id="authentification">Authentification</h2>
+<p>L'API utilise la méthode Basic Auth pour gérer les utilisateurs qui y ont accés.
+L'utilisateur de l'API a un rôle <strong>api</strong>.</p>
+<p>Les utilisateurs sont enregistrés dans la base de données et peuvent être géré depuis le panel Admin. Les utilisateurs par défaut sont indiqués à la page <a href="../security/">Sécurité</a>.</p>
+<p>Il est conseillé de changer le mot de passe par defaut des utilisateurs après la mise en ligne de l'application.</p>
+<h2 id="securite">Sécurité</h2>
+<p>Il se trouve que toutes les actions ne sont pas possible pour des raisons de sécurités. En effet, il n'est pas possible de supprimer une catégorie ou un guest depuis l'API, on doit passer par le panel Admin.</p>
+<p>Mais on peut choisir ce qu'on souhaite avoir comme action via le fichier <code>routes.php</code> qui se trouve dans le dossier <code>api/laravel/app</code> :</p>
+<pre class="prettyprint well"><code>/* Groupe de routes pour le versioning d'API */
+Route::group(array('prefix' =&gt; 'v1', 'before' =&gt; 'auth.basic'), function()
+{
+    Route::resource('categorie', 'CategorieController', array('only' =&gt; array('index', 'show', 'showGuest')));
+    Route::get("categorie/{id}/guest", array("uses" =&gt; "CategorieController@showGuest"));
+    Route::resource('table', 'TableController', array('only' =&gt; array('index', 'show', 'showGuest')));
+    Route::get("table/{id}/guest", array("uses" =&gt; "TableController@showGuest"));
+    Route::resource('guest', 'GuestController', array('only' =&gt; array('index', 'show', 'store')));
+});
+</code></pre>
+<p>Grâce au paramètre <code>only</code> on peut définir un tableau avec les actions voulues.</p>
+</div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+
+        
+
+        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/prettify-1.0.min.js"></script>
+        <script src="../js/base.js"></script>
+        
+    </body>
+</html>
