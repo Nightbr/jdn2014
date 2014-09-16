@@ -12,7 +12,7 @@ Pour accéder au panel d'adminstration, il faut disposer d'un compte utilisateur
 
 Pour avoir les comptes par défaut, se réferrer à la partie [Sécurité](security.md).
 
-![paneladmin](/img/admin.jpg)
+![paneladmin](../img/admin.jpg)
 
 ## Fonctionnalités du panel
 
