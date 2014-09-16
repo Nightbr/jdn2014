@@ -4,5 +4,8 @@ site_dir: docsWeb
 #theme: readthedocs
 pages:
 - [index.md, Home]
+- [installation.md, Installation]
+- [security.md, Sécurité]
 - [api.md, API]
 - [admin.md, Admin]
+- [howto.md, 'How-to']

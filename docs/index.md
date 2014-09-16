@@ -13,6 +13,8 @@ Dans app/api/laravel :
 
     composer.phar install
 
+Pensez à installer la base de données (voir partie 4. Laravel).
+
 ## 2. Lancer un serveur
 
 Note Importante : Sachant que le Basic Auth ne fonctionne pas avec php CGI utilisé par le module grunt-php, il faut mettre l'ensemble du projet dans un environnement de dev (WAMP, MAMP, LAMP, ...). Et du coup, plus besoin d'utiliser le grunt serve.

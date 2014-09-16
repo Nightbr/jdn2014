@@ -67,7 +67,11 @@ voici les requêtes http pour récupérer/modifier un ou plusieurs Guests.
 ## Authentification
 
 L'API utilise la méthode Basic Auth pour gérer les utilisateurs qui y ont accés.
-L'utilisateur de l'API a un rôle **api**
+L'utilisateur de l'API a un rôle **api**.
+
+Les utilisateurs sont enregistrés dans la base de données et peuvent être géré depuis le panel Admin. Les utilisateurs par défaut sont indiqués à la page [Sécurité](security.md).
+
+Il est conseillé de changer le mot de passe par defaut des utilisateurs après la mise en ligne de l'application.
 
 ## Sécurité
 

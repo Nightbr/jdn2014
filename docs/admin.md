@@ -10,6 +10,10 @@ Le panel se situe à l'adresse `api/laravel/public/admin`.
 
 Pour accéder au panel d'adminstration, il faut disposer d'un compte utilisateur disposant du rôle **admin**.
 
+Pour avoir les comptes par défaut, se réferrer à la partie [Sécurité](security.md).
+
+![paneladmin](/img/admin.jpg)
+
 ## Fonctionnalités du panel
 
 Pour chaque service, il est possible de réaliser les fonctions CRUD de base :
@@ -41,6 +45,10 @@ Les informations sur la date de création et de modification ne sont pas affich�
 
 ## Service Users
 
-Les Users correspondent aux utilisateurs qui peuvent accéder à l'application (API et/ou panel administration).
+Les Users correspondent aux utilisateurs qui peuvent accéder à l'application (API ou panel administration).
 
 Seules les informations Username, Role, date de création et de modification sont affichées.
+
+le role `admin` donne accès au panel admin et le role `api` donne accès à l'API.
+
+Il est conseillé de changer le mot de passe par defaut des utilisateurs après la mise en ligne de l'application.

@@ -57,14 +57,18 @@ $(function() {
    var api_url = "http://localhost/jdn2014/app/api/laravel/public/v1/";
    var username = "apiuser1";
    var password = "gogogo";
+   var api_key = btoa(username + ":" + password);
 
 
    //login api
    $.ajax({
       url: api_url+"categorie/1",
       type: 'get',
-      username: username,
-      password: password,
+      //username: username,
+      //password: password,
+      headers: {
+         "Authorization": "Basic " + api_key
+      },
       success: function()
       {
          // on est authentifié
