@@ -6,6 +6,8 @@ Développeur :
 * Titouan BENOIT - titouan.benoit@ig2i.fr
 * Gaetan DELBART - gaetan.delbart@ig2i.fr
 
+Documentation du projet : [Docs en ligne](http://nightbr.github.io/jdn2014/)
+
 ## 1. Installer le projet
 
 Installer les dépendances php avec [composer](https://getcomposer.org/download/).

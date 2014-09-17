@@ -1,4 +1,4 @@
-<!-- div "lapinou" à copier sans modération !!! -->
+      <!-- div "lapinou" à copier sans modération !!! -->
       <div class="lapinou col-md-3" >                  
          <h4>{{title}}</h4>      
             <!--<span>Diplomés</span> -->
