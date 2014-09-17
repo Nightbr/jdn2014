@@ -143,8 +143,78 @@
 
 <h1 id="securite">Sécurité</h1>
 <h2 id="api-rest">API Rest</h2>
+<h3 id="authentification">Authentification</h3>
+<p>L'API utilise la méthode Basic Auth pour gérer les utilisateurs qui y ont accés.
+L'utilisateur de l'API a un rôle <strong>api</strong>.</p>
+<p>Les utilisateurs sont enregistrés dans la base de données et peuvent être géré depuis le panel Admin.</p>
+<p>Il est conseillé de changer le mot de passe par defaut des utilisateurs après la mise en ligne de l'application.</p>
+<h3 id="securite_1">Sécurité</h3>
+<p>Il se trouve que toutes les actions ne sont pas possible pour des raisons de sécurités. En effet, il n'est pas possible de supprimer une catégorie ou un guest depuis l'API, on doit passer par le panel Admin.</p>
+<p>Mais on peut choisir ce qu'on souhaite avoir comme action via le fichier <code>routes.php</code> qui se trouve dans le dossier <code>api/laravel/app</code> :</p>
+<pre class="prettyprint well"><code>/* Groupe de routes pour le versioning d'API */
+Route::group(array('prefix' =&gt; 'v1', 'before' =&gt; 'auth.basic'), function()
+{
+    Route::resource('categorie', 'CategorieController', array('only' =&gt; array('index', 'show', 'showGuest')));
+    Route::get("categorie/{id}/guest", array("uses" =&gt; "CategorieController@showGuest"));
+    Route::resource('table', 'TableController', array('only' =&gt; array('index', 'show', 'showGuest')));
+    Route::get("table/{id}/guest", array("uses" =&gt; "TableController@showGuest"));
+    Route::resource('guest', 'GuestController', array('only' =&gt; array('index', 'show', 'store')));
+});
+</code></pre>
+<p>Grâce au paramètre <code>only</code> on peut définir un tableau avec les actions voulues.</p>
+<h3 id="acces-a-lapi">Accès à l'API</h3>
+<p>Voici un exemple de JavaScript pour s'authentifier à l'API :</p>
+<pre class="prettyprint well"><code>var api_url = "http://localhost/jdn2014/app/api/laravel/public/v1/";
+var username = "apiuser1";
+var password = "gogogo";
+var api_key = btoa(username + ":" + password);
+
+
+//login api
+$.ajax({
+    url: api_url+"categorie/1",
+    type: 'get',
+    //username: username,
+    //password: password,
+    headers: {
+       "Authorization": "Basic " + api_key
+    },
+    success: function()
+    {
+      //code de l'application
+    }
+});
+</code></pre>
+<p>Pour plus de sécurité et ne pas avoir l'username et le password dans le code, on peut juste remplacer <code>api_key</code> par sa valeur en générant un requête avec Postman par exemple et en récupérant simplement le token du Basic Auth.</p>
 <h2 id="panel-admin">Panel admin</h2>
+<p>Pour accéder au panel d'adminstration, il faut disposer d'un compte utilisateur disposant du rôle <strong>admin</strong>.</p>
+<p>Il est conseillé de changer le mot de passe par defaut des utilisateurs après la mise en ligne de l'application.</p>
 <h2 id="comptes-utilisateurs-par-defaut">Comptes utilisateurs par défaut</h2>
+<p>Voici les comptes utilisateurs par défaut dans la base de données lors d'une nouvelle installation de l'application :</p>
+<pre class="prettyprint well"><code>User::create(array(
+  'username' =&gt; 'adminjdn',
+  'password' =&gt; 'jdnadmindede',
+  'email'    =&gt; 'dede@example.com',
+  'role'     =&gt; 'admin'
+));
+
+User::create(array(
+  'username' =&gt; 'apiuser1',
+  'password' =&gt; 'gogogo',
+  'email'    =&gt; 'roo@example.com',
+  'role'     =&gt; 'api'
+));
+</code></pre>
+<p>Soit pour le panel Admin <code>http://localhost/jdn2014/app/api/laravel/public/admin</code> :</p>
+<ul>
+<li>utilisateur : adminjdn</li>
+<li>mot de passe : jdnadmindede</li>
+</ul>
+<p>Soit pour l'api <code>http://localhost/jdn2014/app/api/laravel/public/v1</code> :</p>
+<ul>
+<li>utilisateur : apiuser1</li>
+<li>mot de passe : gogogo</li>
+</ul>
 </div>
         </div>
 

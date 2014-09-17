@@ -143,8 +143,157 @@
 
 <h1 id="how-to">How-To</h1>
 <h2 id="authentification-pour-acceder-a-lapi">Authentification pour accèder à l'API</h2>
+<p>Voici un exemple de code JavaScript pour s'Authentifier à l'API :</p>
+<pre class="prettyprint well"><code>var api_url = "http://localhost/jdn2014/app/api/laravel/public/v1/";
+var username = "apiuser1";
+var password = "gogogo";
+var api_key = btoa(username + ":" + password);
+
+
+//login api
+$.ajax({
+    url: api_url+"categorie/1",
+    type: 'get',
+    //username: username,
+    //password: password,
+    headers: {
+       "Authorization": "Basic " + api_key
+    },
+    success: function()
+    {
+      //code de l'application
+    }
+});
+</code></pre>
+<p>Voir la partie <a href="../security/">Sécurité</a> pour plus d'information.</p>
 <h2 id="recuperation-et-affichage-des-categories-en-ajax-avec-jquery">Récupération et affichage des catégories en Ajax avec jQuery</h2>
+<p>Au préalable avoir jQuery et Mustache dans son projet.</p>
+<p>index.html</p>
+<pre class="prettyprint well"><code>&lt;script src="http://code.jquery.com/jquery-1.7.1.min.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="js/mustache.js"&gt;&lt;/script&gt;
+</code></pre>
+<p>Nous allons récupérer les catégories puis les afficher à l'aide du système de microtemplating <strong>Mustache</strong> :</p>
+<p>app.js</p>
+<pre class="prettyprint well"><code>// on est authentifié
+// affichage liste des promos
+$.getJSON(api_url+"categorie", function(data) {
+   var result = data;
+   if(!result.error){ 
+        // on va chercher le template
+        $.get("tpl/lapinou.tpl", function(data){
+            var tpl = data;
+
+            $.each(result.categories, function(key, categorie) {
+                //console.log(key, categorie);
+                var dataRender = {'id':categorie.id,'title':categorie.title} // on organise les données à afficher
+                $("#promoList").append(Mustache.render(tpl, dataRender)); // on ajoute le contenu 
+                // construction de la liste du form d'inscription
+                $("#categorie").append('&lt;option value="'+categorie.id+'"&gt;'+categorie.title+'&lt;/option&gt;'); 
+            });
+        });
+    }
+});
+</code></pre>
+<p>tpl/lapinou.tpl</p>
+<pre class="prettyprint well"><code>&lt;!-- div "lapinou" à copier sans modération !!! --&gt;
+&lt;div class="lapinou col-md-3" &gt;                  
+    &lt;h4&gt;{{title}}&lt;/h4&gt;      
+        &lt;!--&lt;span&gt;Diplomés&lt;/span&gt; --&gt;
+           &lt;!--LAPINOU MODAL: afficher la liste dans un modal + voir avec l'API si possible, 
+           envoyer la liste ajax en fonction du bouton cliqué (#data-target "#MyModal?listepromo200X"?? ou dans le js (en bas)
+           Ceci est un test, copier les lapinous si fonctionnel... ;) 
+           Le modal se trouve en dessous des lapinous pour modifs--&gt;
+       &lt;br/&gt; &lt;br/&gt;
+     &lt;button class="btn btn-danger btn-lg button-modal"  data-target="#myModal" data-id="{{id}}" data-title="{{title}}"&gt;
+        Voir la liste
+    &lt;/button&gt;   
+&lt;/div&gt;     
+&lt;!-- fin div "lapinou" --&gt;
+</code></pre>
 <h2 id="inscription-dun-guest-en-ajax-avec-jquery">Inscription d'un Guest en Ajax avec jQuery</h2>
+<p>Créer un formulaire en html :</p>
+<p>index.html </p>
+<pre class="prettyprint well"><code>&lt;form method="post" name="inscriptionform" id="inscrform" class="validate item_left" role="form"&gt;                                                      
+   &lt;div class="form-group"&gt;                                     
+      &lt;div class="col-md-6"&gt;                                        
+         &lt;label for="firstname"&gt;Prénom&lt;/label&gt;                                      
+         &lt;input type="text" name="firstname" id="firstname" class="form-control input-lg required" placeholder="Votre prénom"&gt;                                      
+      &lt;/div&gt;        
+       &lt;div class="col-md-6"&gt;                                       
+         &lt;label for="lastname"&gt;Nom&lt;/label&gt;                                      
+         &lt;input type="text" name="lastname" id="lastname" class="form-control input-lg required" placeholder="Votre nom"&gt;                                       
+      &lt;/div&gt;                    
+      &lt;div class="col-md-6"&gt;                                            
+         &lt;label for="email"&gt;Email&lt;/label&gt;                                       
+         &lt;input type="email" name="email" id="email" class="form-control input-lg required email" placeholder="Votre email"&gt;                                        
+      &lt;/div&gt;
+      &lt;div class="col-md-6"&gt;                                
+         &lt;label for="categorie"&gt;Categorie/Promotion&lt;/label&gt;
+         &lt;select id="categorie" name="categorie_id" class="form-control input-lg required" placeholder="Votre Categorie/Promotion"&gt;
+         &lt;/select&gt;
+      &lt;/div&gt;
+      &lt;div class="col-md-6"&gt;                                
+         &lt;label for="table"&gt;Table&lt;/label&gt;
+         &lt;select id="table" name="table_id" class="form-control input-lg required" placeholder="Votre Table"&gt;
+         &lt;/select&gt;
+      &lt;/div&gt;
+   &lt;/div&gt;
+  &lt;div class="form-group"&gt;                                      
+    &lt;div class="col-md-12 text-right"&gt;                              
+      &lt;input type="submit" id="inscrform_submit" class="btn btn-dark" value="S'inscrire"&gt;                                       
+    &lt;/div&gt;                                  
+  &lt;/div&gt;                  
+  &lt;input type="hidden" name="subject" value="Contact from your site"&gt;                               
+&lt;/form&gt;
+</code></pre>
+<p>note : Il faut au préalable avoir été authentifié à l'api.</p>
+<p>app.js</p>
+<pre class="prettyprint well"><code>   // Inscription Form Request
+   var inscrform = $('#inscrform');
+   var submit = $('#inscrform_submit');
+   var infoDiv = $('#infoDiv');
+
+   inscrform.validate();
+
+   // form submit event
+    $(document).on('submit', '#inscrform', function(e) {
+      e.preventDefault(); // prevent default form submit
+      // sending ajax request through jQuery
+      //console.log(inscrform);
+      $.ajax({
+         url: api_url+'guest', 
+         type: 'POST', 
+         data: inscrform.serialize()+"&amp;isPaid=0",
+         success: function(data) {
+            inscrform.fadeOut(300);
+            if(!data.error){
+
+               infoDiv.html("Vous avez bien été inscrit, merci de régler les frais d'inscription le plus vite possible."); // fade in response data     
+               infoDiv.fadeIn(100);
+               setTimeout(function() {
+                  infoDiv.fadeOut(300);
+                  inscFormInit(api_url);
+                  $('#firstname, #email, #lastname, #table, #categorie').val('');
+                  inscrform.fadeIn(1800);
+               }, 4000 );  
+            }
+            else
+            {
+               infoDiv.html("Erreur lors de l'inscription !!"); // fade in response data     
+               infoDiv.fadeIn(100);
+               setTimeout(function() {
+                  infoDiv.fadeOut(300);
+                  inscrform.fadeIn(1800);
+               }, 4000 );
+            }
+
+         },
+         error: function(e) {
+            console.log(e)
+         }
+      });
+   });
+</code></pre>
 </div>
         </div>
 
