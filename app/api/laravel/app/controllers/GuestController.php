@@ -43,7 +43,38 @@ class GuestController extends \BaseController {
 		$guest->email = Request::get('email');
 		$guest->isPaid = Request::get('isPaid');
       $guest->categorie()->associate(Categorie::find(Request::get('categorie_id')));
-		$guest->table()->associate(Table::find(Request::get('table_id')));
+
+      $curTable = Table::find(Request::get('table_id'));
+
+      if($curTable->is_full)
+      {
+         return Response::json(array(
+             'error' => true,
+             'guest' => null,
+             'messages' => "La table est pleine !"),
+             200
+         );
+      }
+      else
+      {
+         if(($curTable->max_chairs - $curTable->guests()->count())  <= 0)
+         {
+
+            $curTable->is_full = true;
+            $curTable->save();
+
+            return Response::json(array(
+             'error' => true,
+             'guest' => null,
+             'messages' => "La table est pleine !"),
+             200
+         );
+         }
+         else
+         {
+            $guest->table()->associate($curTable);
+         }
+      }
 		//$guest->guest_id = Request::get('guest_id');
 		 
 		$validator = Validator::make(Input::all(), Guest::$rules);

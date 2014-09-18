@@ -10,6 +10,23 @@ class TableController extends \BaseController {
    public function index()
    {
       $tables = Table::get();
+
+      // permet de vérifier que les tables sont pleines ou pas et met jour la base automatiquement
+      foreach ($tables as $key => $curTable) {
+         
+         if(($curTable->max_chairs - $curTable->guests()->count())  <= 0)
+         {
+            $curTable->is_full = true;
+         }
+         else
+         {
+            $curTable->is_full = false;
+         }
+
+         $curTable->save();
+      }
+
+      $tables = Table::get();
  
       return Response::json(array(
           'error' => false,
