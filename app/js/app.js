@@ -1,3 +1,7 @@
+var onMobile = false;
+if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+   onMobile = true;
+}
 
 //load parallaxes
  $(document).ready(function(){
@@ -9,11 +13,14 @@
  });
 
 //Handle window's resizing to reload parallaxes' divs
-$( window ).resize(function() {
-   var url= location.href;
-   url = url.split("#",1)
-   location = url;
-});
+if(!onMobile)
+{
+   $( window ).resize(function() {
+      var url= location.href;
+      url = url.split("#",1)
+      location = url;
+   });
+}
 
 //Navbar Scroll
 $('#nav0').click(function () {
@@ -54,7 +61,7 @@ $(function() {
 //Main App JS - TB
 
    // à voir pour la sécu...
-   var api_url = "http://localhost/jdn2014/app/api/laravel/public/v1/";
+   var api_url = "api/laravel/public/v1/";
    var username = "apiuser1";
    var password = "gogogo";
    var api_key = btoa(username + ":" + password);
