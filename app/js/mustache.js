@@ -71,6 +71,9 @@
    * Returns `true` if the tail is empty (end of string).
    */
   Scanner.prototype.eos = function () {
+    if(this.tail==undefined || this.tail == null)
+      this.tail="";
+
     return this.tail === "";
   };
 

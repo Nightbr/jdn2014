@@ -76,16 +76,21 @@ $(function() {
          $.getJSON(api_url+"categorie", function(data) {
                var result = data;
                if(!result.error){ 
-                  $.get("tpl/lapinou.tpl", function(data){
-                     var tpl = data;
+                  $.ajax({
+                     url: "tpl/lapinou.tpl",
+                     type: 'GET',
+                     dataType: 'text',
+                     success: function(data){
+                        var tpl = data;
 
-                     $.each(result.categories, function(key, categorie) {
-                        //console.log(key, categorie);
-                        var dataRender = {'id':categorie.id,'title':categorie.title}
-                        $("#promoList").append(Mustache.render(tpl, dataRender));
-                        // construction de la liste du form d'inscription
-                        $("#categorie").append('<option value="'+categorie.id+'">'+categorie.title+'</option>'); 
-                     });
+                        $.each(result.categories, function(key, categorie) {
+                           //console.log(key, categorie);
+                           var dataRender = {'id':categorie.id,'title':categorie.title}
+                           $("#promoList").append(Mustache.render(tpl, dataRender));
+                           // construction de la liste du form d'inscription
+                           $("#categorie").append('<option value="'+categorie.id+'">'+categorie.title+'</option>'); 
+                        });
+                     }
                   });
 
                   // gestion du modal
@@ -98,20 +103,25 @@ $(function() {
                         //console.log(data);
                         var result = data;
                         if(!result.error){ 
-                           $.get("tpl/modal.tpl", function(data){
-                              var tpl = data;
-                              var dataRender = new Array();
-                              dataRender['title'] = title;
-                              dataRender['count'] = result.guests.length;
-                              dataRender['guests'] = new Array();
+                           $.ajax({
+                              url: "tpl/modal.tpl",
+                              type: 'GET',
+                              dataType: 'text',
+                              success: function(data){
+                                 var tpl = data;
+                                 var dataRender = new Array();
+                                 dataRender['title'] = title;
+                                 dataRender['count'] = result.guests.length;
+                                 dataRender['guests'] = new Array();
 
-                              $.each(result.guests, function(key, guest) {
-                                 //console.log(key, guest);
-                                 dataRender['guests'].push({'firstname':guest.firstname,'lastname':guest.lastname});
-                                 
-                              });
-                              //console.log(dataRender);
-                              $("#promoModal").html(Mustache.render(tpl, dataRender));
+                                 $.each(result.guests, function(key, guest) {
+                                    //console.log(key, guest);
+                                    dataRender['guests'].push({'firstname':guest.firstname,'lastname':guest.lastname});
+                                    
+                                 });
+                                 //console.log(dataRender);
+                                 $("#promoModal").html(Mustache.render(tpl, dataRender));
+                              }
                            });
                         }
                      });
