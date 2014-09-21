@@ -244,30 +244,31 @@ $(function() {
    });
 
 
+   function inscFormInit(api_url){
+      $('#table').html('');
+
+      $.ajax({
+         url: api_url+"table", 
+         type: 'GET', 
+         cache: false,
+         success: function(data) {
+            var result = data;
+            if(!result.error){ 
+               
+               $.each(result.tables, function(key, table) {
+                  // construction de la liste du form d'inscription
+                  //if(!table.is_full){
+                  if(table.is_full == 0){
+                     $.getJSON(api_url+"table/"+table.id+"/guest", function(data) {
+                        var remains_chairs = table.max_chairs - data.guests.length ;
+                        $("#table").append('<option value="'+table.id+'">'+table.title+' (Il reste '+remains_chairs+' place(s) à cette table)</option>'); 
+                     });
+                  }
+               });
+            }
+         }
+      });
+   }
 });
 
 
-function inscFormInit(api_url){
-   $('#table').html('');
-
-   $.ajax({
-      url: api_url+"table", 
-      type: 'GET', 
-      cache: false,
-      success: function(data) {
-         var result = data;
-         if(!result.error){ 
-            
-            $.each(result.tables, function(key, table) {
-               // construction de la liste du form d'inscription
-               if(!table.is_full){
-                  $.getJSON(api_url+"table/"+table.id+"/guest", function(data) {
-                     var remains_chairs = table.max_chairs - data.guests.length ;
-                     $("#table").append('<option value="'+table.id+'">'+table.title+' (Il reste '+remains_chairs+' place(s) à cette table)</option>'); 
-                  });
-               }
-            });
-         }
-      }
-   });
-}
