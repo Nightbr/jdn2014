@@ -1,3 +1,7 @@
+var onMobile = false;
+if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) {
+   onMobile = true;
+}
 
 //load parallaxes
  $(document).ready(function(){
@@ -9,11 +13,14 @@
  });
 
 //Handle window's resizing to reload parallaxes' divs
-$( window ).resize(function() {
-   var url= location.href;
-   url = url.split("#",1)
-   location = url;
-});
+if(!onMobile)
+{
+   $( window ).resize(function() {
+      var url= location.href;
+      url = url.split("#",1)
+      location = url;
+   });
+}
 
 //Navbar Scroll
 $('#nav0').click(function () {
@@ -54,7 +61,7 @@ $(function() {
 //Main App JS - TB
 
    // à voir pour la sécu...
-   var api_url = "http://localhost/jdn2014/app/api/laravel/public/v1/";
+   var api_url = "api/laravel/public/v1/";
    var username = "apiuser1";
    var password = "gogogo";
    var api_key = btoa(username + ":" + password);
@@ -76,16 +83,21 @@ $(function() {
          $.getJSON(api_url+"categorie", function(data) {
                var result = data;
                if(!result.error){ 
-                  $.get("tpl/lapinou.tpl", function(data){
-                     var tpl = data;
+                  $.ajax({
+                     url: "tpl/lapinou.tpl",
+                     type: 'GET',
+                     dataType: 'text',
+                     success: function(data){
+                        var tpl = data;
 
-                     $.each(result.categories, function(key, categorie) {
-                        //console.log(key, categorie);
-                        var dataRender = {'id':categorie.id,'title':categorie.title}
-                        $("#promoList").append(Mustache.render(tpl, dataRender));
-                        // construction de la liste du form d'inscription
-                        $("#categorie").append('<option value="'+categorie.id+'">'+categorie.title+'</option>'); 
-                     });
+                        $.each(result.categories, function(key, categorie) {
+                           //console.log(key, categorie);
+                           var dataRender = {'id':categorie.id,'title':categorie.title}
+                           $("#promoList").append(Mustache.render(tpl, dataRender));
+                           // construction de la liste du form d'inscription
+                           $("#categorie").append('<option value="'+categorie.id+'">'+categorie.title+'</option>'); 
+                        });
+                     }
                   });
 
                   // gestion du modal
@@ -98,20 +110,25 @@ $(function() {
                         //console.log(data);
                         var result = data;
                         if(!result.error){ 
-                           $.get("tpl/modal.tpl", function(data){
-                              var tpl = data;
-                              var dataRender = new Array();
-                              dataRender['title'] = title;
-                              dataRender['count'] = result.guests.length;
-                              dataRender['guests'] = new Array();
+                           $.ajax({
+                              url: "tpl/modal.tpl",
+                              type: 'GET',
+                              dataType: 'text',
+                              success: function(data){
+                                 var tpl = data;
+                                 var dataRender = new Array();
+                                 dataRender['title'] = title;
+                                 dataRender['count'] = result.guests.length;
+                                 dataRender['guests'] = new Array();
 
-                              $.each(result.guests, function(key, guest) {
-                                 //console.log(key, guest);
-                                 dataRender['guests'].push({'firstname':guest.firstname,'lastname':guest.lastname});
-                                 
-                              });
-                              //console.log(dataRender);
-                              $("#promoModal").html(Mustache.render(tpl, dataRender));
+                                 $.each(result.guests, function(key, guest) {
+                                    //console.log(key, guest);
+                                    dataRender['guests'].push({'firstname':guest.firstname,'lastname':guest.lastname});
+                                    
+                                 });
+                                 //console.log(dataRender);
+                                 $("#promoModal").html(Mustache.render(tpl, dataRender));
+                              }
                            });
                         }
                      });
