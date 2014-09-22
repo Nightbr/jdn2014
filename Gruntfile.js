@@ -55,20 +55,6 @@ module.exports = function (grunt) {
             }
         },
 
-        // Renames files for browser caching purposes
-        rev: {
-            dist: {
-                files: {
-                    src: [
-                        '<%= yeoman.dist %>/scripts/{,*/}*.js',
-                        '<%= yeoman.dist %>/styles/{,*/}*.css',
-                        '<%= yeoman.dist %>/images/{,*/}*.{gif,jpeg,jpg,png,webp}',
-                        '<%= yeoman.dist %>/styles/fonts/{,*/}*.*'
-                    ]
-                }
-            }
-        },
-
         // Reads HTML for usemin blocks to enable smart builds that automatically
         // concat, minify and revision files. Creates configurations in memory so
         // additional tasks can operate on them
@@ -165,74 +151,32 @@ module.exports = function (grunt) {
                     cwd: '<%= yeoman.app %>',
                     dest: '<%= yeoman.dist %>',
                     src: [
-                        'api/{,*/}*.*',
+                        'api/**/*.*',
                         '*.{ico,png,txt}',
                         '.htaccess',
-                        'images/{,*/}*.webp',
-                        'styles/fonts/{,*/}*.*',
-                        'bower_components/sass-bootstrap/fonts/*.*'
+                        'images/{,*/}*.*',
+                        'img/{,*/}*.*',
+                        'fonts/{,*/}*.*',
+                        'css/{,*/}*.*',
+                        'tpl/*.*'
                     ]
                 }]
-            },
-            styles: {
-                expand: true,
-                dot: true,
-                cwd: '<%= yeoman.app %>/styles',
-                dest: '.tmp/styles/',
-                src: '{,*/}*.css'
             }
         },
 
     });
 
-
-    grunt.registerTask('serve', function (target) {
-        if (target === 'dist') {
-            return grunt.task.run([
-                'build',
-                'configureProxies',
-                'php:dist',
-                'connect:dist:keepalive'
-            ]);
-        }
-
-        grunt.task.run([
-            'clean:server',
-            'concurrent:server',
-            'autoprefixer',
-            'configureProxies',
-            'php:server',
-            'connect:livereload',
-            'watch'
-        ]);
-    });
-
-    grunt.registerTask('server', function () {
-        grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-        grunt.task.run(['serve']);
-    });
-
-    grunt.registerTask('test', function(target) {
-        if (target !== 'watch') {
-            grunt.task.run([
-                'clean:server',
-                'autoprefixer',
-            ]);
-        }
-    });
-
     grunt.registerTask('build', [
         'clean:dist',
         'useminPrepare',
-        'concurrent:dist',
         'autoprefixer',
         'concat',
         'cssmin',
         'uglify',
         'copy:dist',
-        'modernizr',
-        'rev',
-        'usemin'
+        'htmlmin',
+        'usemin',
+        'imagemin'
     ]);
 
     grunt.registerTask('default', [

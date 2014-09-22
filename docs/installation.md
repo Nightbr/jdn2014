@@ -26,3 +26,11 @@ Dans le dossier de laravel : `app/api/laravel`, ouvrir une console et entrer :
 * configurer la connexion dans `laravel/app/config/database.php`
 * Créer les tables : dans le dossier de laravel : `app/api/laravel`, ouvrir une console et entrer : `php artisan migrate`
 * Créer les données de base : dans le dossier de laravel : `app/api/laravel`, ouvrir une console et entrer : `php artisan db:seed`
+
+## 3. Version de production : distribuable 
+
+Pour générer le dist, il faut au préalable avoir installé les modules avec `npm update` puis executer la commande :
+
+    grunt build
+
+Un dossier `dist` sera créé avec l'application prête à être déployée sur un serveur (css et js minifiés, optimisation des images, ...).
