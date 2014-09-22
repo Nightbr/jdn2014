@@ -136,6 +136,8 @@
         
             <li><a href="#2-installation-de-la-base-de-donnees">2. Installation de la base de données</a></li>
         
+            <li><a href="#3-version-de-production-distribuable">3. Version de production : distribuable</a></li>
+        
     
     </ul>
 </div></div>
@@ -166,6 +168,11 @@
 <li>Créer les tables : dans le dossier de laravel : <code>app/api/laravel</code>, ouvrir une console et entrer : <code>php artisan migrate</code></li>
 <li>Créer les données de base : dans le dossier de laravel : <code>app/api/laravel</code>, ouvrir une console et entrer : <code>php artisan db:seed</code></li>
 </ul>
+<h2 id="3-version-de-production-distribuable">3. Version de production : distribuable</h2>
+<p>Pour générer le dist, il faut au préalable avoir installé les modules avec <code>npm update</code> puis executer la commande :</p>
+<pre class="prettyprint well"><code>grunt build
+</code></pre>
+<p>Un dossier <code>dist</code> sera créé avec l'application prête à être déployée sur un serveur (css et js minifiés, optimisation des images, ...).</p>
 </div>
         </div>
 
