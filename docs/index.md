@@ -15,6 +15,12 @@ Dans app/api/laravel :
 
 Pensez à installer la base de données (voir partie 4. Laravel).
 
+Pour générer la version de production, installer les modules avec `npm update` puis lancer grunt avec la commande :
+
+    grunt build
+
+Cela va générer un dossier `dist` avec l'application prête à être déployée.
+
 ## 2. Lancer un serveur
 
 Note Importante : Sachant que le Basic Auth ne fonctionne pas avec php CGI utilisé par le module grunt-php, il faut mettre l'ensemble du projet dans un environnement de dev (WAMP, MAMP, LAMP, ...). Et du coup, plus besoin d'utiliser le grunt serve.

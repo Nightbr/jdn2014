@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'jdn2014',
 			'username'  => 'root',
-			'password'  => 'mysqlpass',
+			'password'  => '',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
