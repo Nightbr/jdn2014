@@ -26,7 +26,7 @@ class TableController extends \BaseController {
          $curTable->save();
       }
 
-      $tables = Table::get();
+      $tables = Table::orderBy('title', 'asc')->get();
  
       return Response::json(array(
           'error' => false,

@@ -9,7 +9,7 @@ class GuestController extends \BaseController {
 	 */
 	public function index()
 	{
-		$guest = Guest::get();
+		$guest = Guest::orderBy('firstname', 'asc')->orderBy('lastname', 'asc')->get();
  
 		return Response::json(array(
 		    'error' => false,
@@ -41,8 +41,9 @@ class GuestController extends \BaseController {
 		$guest->firstname = Request::get('firstname');
 		$guest->lastname = Request::get('lastname');
 		$guest->email = Request::get('email');
-		$guest->isPaid = Request::get('isPaid');
-      $guest->categorie()->associate(Categorie::find(Request::get('categorie_id')));
+        $guest->isPaid = Request::get('isPaid');
+		$guest->isSpecial = Request::get('isSpecial');
+        $guest->categorie()->associate(Categorie::find(Request::get('categorie_id')));
 
       $curTable = Table::find(Request::get('table_id'));
 
@@ -201,6 +202,25 @@ class GuestController extends \BaseController {
          }
 		    
 		}
+
+        if ( Request::get('isSpecial') || Request::get('isSpecial') == 0 )
+        {
+         $validator = Validator::make(
+             array('isSpecial' => Request::get('isSpecial')),
+             array('isSpecial' => array('boolean'))
+         );
+
+         if(!$validator->fails())
+         {
+            $guest->isSpecial = Request::get('isSpecial');
+         }
+         else
+         {
+            $error = true;
+            $messages = $validator->messages();
+         }
+            
+        }
 
 		if ( Request::get('categorie_id') )
 		{

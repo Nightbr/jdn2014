@@ -9,7 +9,7 @@ class CategorieController extends \BaseController {
 	 */
 	public function index()
 	{
-		$categories = Categorie::get();
+		$categories = Categorie::orderBy('title', 'asc')->get();
  
 		return Response::json(array(
 		    'error' => false,

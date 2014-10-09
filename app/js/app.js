@@ -271,6 +271,10 @@ $(function() {
          success: function(data) {
             var result = data;
             if(!result.error){ 
+
+               $.ajaxSetup({
+                  async: false
+               });
                
                $.each(result.tables, function(key, table) {
                   // construction de la liste du form d'inscription
@@ -281,6 +285,10 @@ $(function() {
                         $("#table").append('<option value="'+table.id+'">'+table.title+' (Il reste '+remains_chairs+' place(s) à cette table)</option>'); 
                      });
                   }
+               });
+
+               $.ajaxSetup({
+                  async: true
                });
             }
          }

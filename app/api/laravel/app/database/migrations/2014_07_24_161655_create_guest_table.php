@@ -19,6 +19,7 @@ class CreateGuestTable extends Migration {
 		    $table->string('lastname');
 		    $table->string('email');
 		    $table->boolean('isPaid');
+		    $table->boolean('isSpecial');
 		    $table->integer('categorie_id')->unsigned();
 		    $table->integer('table_id')->unsigned();
 		    $table->timestamps();

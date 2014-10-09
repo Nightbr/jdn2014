@@ -19,6 +19,10 @@ return array(
 			'title' => 'Is Paid',
 			'select' => "IF((:table).isPaid,'True', 'False')",
 		),
+		'isSpecial' => array(
+			'title' => 'Is Special',
+			'select' => "IF((:table).isSpecial,'True', 'False')",
+		),
 		'categorie'=> array(
 			'title' => 'Categorie',
 			'relationship' => 'categorie',
@@ -47,6 +51,10 @@ return array(
 			'title' => 'Is Paid',
 			'type' =>'bool',
 		),
+		'isSpecial' =>array(
+			'title' => 'Is Special',
+			'type' =>'bool',
+		),
 		'categorie'=> array(
 			'title' => 'Categorie',
 			'type' => 'relationship',
@@ -63,16 +71,20 @@ return array(
 			'title' => 'Is Paid',
 			'type' => 'bool',
 		),
+		'isSpecial' =>array(
+			'title' => 'Is Special',
+			'type' => 'bool',
+		),
 		'categorie'=> array(
 			'title' => 'Categorie',
 			'type' => 'relationship',
 			'name_field' =>'title',
 		),
-      'table'=> array(
-         'title' => 'Table',
-         'type' => 'relationship',
-         'name_field' =>'title',
-      ),
+	    'table'=> array(
+	       'title' => 'Table',
+	       'type' => 'relationship',
+	       'name_field' =>'title',
+	    ),
 	),
 	'sort' =>array(
 		'field' =>'categorie',
