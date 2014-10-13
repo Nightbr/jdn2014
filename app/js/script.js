@@ -5,8 +5,6 @@ $(window).load(function() {
 });
 
 $(document).ready(function() {
-
-  initializeMap(lat,lng);
   
 	//Elements Appear from top
 	$('.item_top').each(function() {
@@ -174,25 +172,7 @@ if (onMobile == false) {
 	};
 	Core.initialize();
 })();
-}
-//Initilize Google Map
- function initializeMap(lat,lng) {
-     var mapOptions = {
-       center: new google.maps.LatLng(lat, lng),
-       zoom: 16,
-       zoomControl: true,
-       scaleControl: true,
-       scrollwheel: true,
-       mapTypeId: google.maps.MapTypeId.ROADMAP
-     };
-     var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
-     var marker = new google.maps.Marker({
-     position: mapOptions['center'],
-     map: map,
-     });
-       
-     return map;
- }    
+} 
  
  
  
