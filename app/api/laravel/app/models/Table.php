@@ -9,6 +9,7 @@ class Table extends Eloquent {
     public static $rules = array(
       'title'             => 'required',
       'max_chairs'        => 'required|integer',
+      'available_chairs'        => 'required|integer',
       'is_full'           => 'required|boolean',
    );
 

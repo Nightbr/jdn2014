@@ -280,10 +280,7 @@ $(function() {
                   // construction de la liste du form d'inscription
                   //if(!table.is_full){
                   if(table.is_full == 0){
-                     $.getJSON(api_url+"table/"+table.id+"/guest", function(data) {
-                        var remains_chairs = table.max_chairs - data.guests.length ;
-                        $("#table").append('<option value="'+table.id+'">'+table.title+' (Il reste '+remains_chairs+' place(s) à cette table)</option>'); 
-                     });
+                        $("#table").append('<option value="'+table.id+'">'+table.title+' (Il reste '+table.available_chairs+' place(s) à cette table)</option>'); 
                   }
                });
 

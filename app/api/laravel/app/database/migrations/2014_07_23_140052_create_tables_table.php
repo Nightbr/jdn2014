@@ -17,6 +17,7 @@ class CreateTablesTable extends Migration {
          $table->increments('id');
          $table->string('title');
          $table->integer('max_chairs');
+         $table->integer('available_chairs');
          $table->boolean('is_full');
       });
 	}

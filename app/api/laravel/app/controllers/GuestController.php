@@ -58,10 +58,12 @@ class GuestController extends \BaseController {
       }
       else
       {
-         if(($curTable->max_chairs - $curTable->guests()->count())  <= 0)
+         $available_chairs = ($curTable->max_chairs - $curTable->guests()->count());
+         if($available_chairs  <= 0)
          {
 
             $curTable->is_full = true;
+            $curTable->available_chairs = 0 ;
             $curTable->save();
 
             return Response::json(array(

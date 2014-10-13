@@ -12,6 +12,9 @@ return array(
       'max_chairs' => array(
          'title' => 'max Chairs',
       ),
+      'available_chairs' => array(
+         'title' => 'Available Chairs',
+      ),
       'is_full' =>array(
          'title' => 'Is Full',
          'select' => "IF((:table).is_full,'True','False')",

@@ -14,13 +14,16 @@ class TableController extends \BaseController {
       // permet de vérifier que les tables sont pleines ou pas et met jour la base automatiquement
       foreach ($tables as $key => $curTable) {
          
-         if(($curTable->max_chairs - $curTable->guests()->count())  <= 0)
+         $available_chairs = ($curTable->max_chairs - $curTable->guests()->count());
+         if( $available_chairs <= 0)
          {
             $curTable->is_full = true;
+            $curTable->available_chairs = 0 ;
          }
          else
          {
             $curTable->is_full = false;
+            $curTable->available_chairs = $available_chairs;
          }
 
          $curTable->save();
